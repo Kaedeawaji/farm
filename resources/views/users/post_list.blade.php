@@ -27,9 +27,11 @@
                         <tbody>
                             <tr>
                                 <th scope='col'>牧場名：</th>
-                                /
+                                　
                                 <th scope='col'>タイトル：{{ $post['title'] }}</th>
+                                　
                                 <th scope='col'>内容：{{ $post['body'] }}</th>
+                                　
                                 <th scope='col'>画像：</th>
 
                             </tr>
