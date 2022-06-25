@@ -29,6 +29,10 @@
                 </div>
                 <div class="my-navbar-control">
                     @if(Auth::check())
+                        <div class="justify-content">
+                            <a class="my-navbar-item" href="{{ route('home') }}">トップ</a> 
+                        </div>
+
                         <span class="my-navbar-item">{{ Auth::user()->name }}</spen>
                         /
                         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>

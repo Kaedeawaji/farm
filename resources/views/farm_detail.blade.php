@@ -26,6 +26,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">口コミ一覧</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">登録情報編集</a>
+            </li>
+
         </ul>
     </div>
 @endcan

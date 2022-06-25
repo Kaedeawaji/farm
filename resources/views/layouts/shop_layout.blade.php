@@ -28,10 +28,6 @@
                 </div> -->
                 <div class="my-navbar-control">
                     @if(Auth::check())
-                    <!-- <a href="#" id="logout" class="my-navbar-item">予約一覧</a>
-                    <a href="#" id="logout" class="my-navbar-item">口コミ一覧</a>
-                    <a href="#" id="logout" class="my-navbar-item">登録情報編集</a>
- -->                   
 
                         <span class="my-navbar-item">{{ Auth::user()->name }}</spen>
                         /
