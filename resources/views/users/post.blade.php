@@ -5,7 +5,7 @@
             <div class="col-md-5 mx-auto">
                 <div class="container">
                     <h1 class="my-2 text-center">口コミ投稿</h1>
-                    <form action="" method="post">
+                    <form action="" method="post" enctype='multipart/form-data'>
                     @csrf
                         <section>
                             <style>
@@ -69,9 +69,8 @@
 
                         <label for="title">タイトル</label>
                         <input type="text" class="form-control" name="title" value="" />
-
                             <label for="inputFile">画像選択</label>
-                            <input type="file" class="form-control-file" id="inputFile">
+                            <input type="file" class="form-control-file" id="inputFile" name="post_img">
                             <label for='body' class='mt-2'>内容</label>
                             <textarea type="text" class='form-control' name='body'>{{ old('comment') }}</textarea>
                         <div class="section1 text-center p-5" >

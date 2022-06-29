@@ -38,13 +38,12 @@
                         <th scope='col'>{{ $plans['name'] }}</th>
                         <th scope='col'>{{ $plans['price'] }}</th>
                         <th scope='col'>{{ $plans['detail'] }}</th>
+                        <th scope='col'>
+                            <a href="{{ route('delete.plan', ['plan' => $plans->id]) }}">削除</a>
+                        </th>
                     </tr>
                 </tbody>
             </table>
-            <div class="row justify-content-around">
-                <a type='submit' class="btn btn-primary w-25 mt-3" href="{{ route ('reserve.form', ['plan' => $plans['id']]) }}" role="button">予約する</a>
-                <a type='submit' class="btn btn-primary w-25 mt-3" href="{{ route ('post.form', ['plan' => $plans['id']]) }}" role="button">口コミを投稿する</a>
-            </div>
         </div>
     </div>   
     @endforeach
@@ -75,6 +74,9 @@
                         <th scope='col'>{{ $posts['title'] }}</th>
                         <th scope='col'>{{ $posts['star'] }}</th>
                         <th scope='col'>{{ $posts['body'] }}</th>
+                        <th scope='col'>
+                            <a href="{{ route('delete.post', ['post' => $posts->id]) }}">削除</a>
+                        </th>
                     </tr>
                 </tbody>
             </table>
@@ -82,15 +84,9 @@
     </div>   
     @endforeach
 
-        <nav>
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">前へ</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">次へ</a></li>
-            </ul>
-        </nav>    
-    </div>
+    <div class="d-flex justify-content-center">
+        {{ $post->links() }}
+    </div>    
+</div>
 
 @endsection('content')

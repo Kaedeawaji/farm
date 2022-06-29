@@ -16,12 +16,12 @@
         </ul>
     </div>
     <div class="card-body">
-        <div class="input-group">
-            <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="キーワードを入力"></input>
-            <span class="input-group-btn input-group-append">
-                <submit type="submit" id="btn-search" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit>
-            </span>
-        </div>  
+        <div class="d-flex justify-content-center">
+            <form action="{{ route('user_list') }}" method="GET">
+                <input type="text" name="keyword" value="{{ $keyword }}">
+                <input type="submit" value="検索">
+            </form>
+        </div> 
         <div class="container">
             <h1 class="my-2">ユーザー一覧</h1>
             @foreach($users as $user)
@@ -56,16 +56,9 @@
                 </div>
             </div>
             @endforeach
-
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">前へ</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">次へ</a></li>
-                </ul>
-            </nav>    
+            <div class="d-flex justify-content-center">
+                {{ $users->links() }}
+            </div>        
         </div> 
     </div>
 </body>

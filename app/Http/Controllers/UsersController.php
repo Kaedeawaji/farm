@@ -17,10 +17,8 @@ class UsersController extends Controller
 {
     // 予約フォーム表示
     public function reserveForm(){
-        // $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
 
         return view('users/reserve',[
-            // 'reserves' => $reserve,
         ]);
     }
 
@@ -56,7 +54,7 @@ class UsersController extends Controller
         $farmall = $farm->all()->toArray();
 
         // 予約リストの取得
-        $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
+        $reserve = Auth::user()->reserve()->where('del_flg', '0')->paginate(5);
         $farms = $farm->plan()->where('del_flg', '0')->get();
 
         return view('users/user_reslist',[
@@ -90,8 +88,7 @@ class UsersController extends Controller
 
 // 口コミ投稿一覧表示
     public function postlist(){
-
-        $posts = Auth::user()->post()->where('del_flg', '0')->get();
+        $posts = Auth::user()->post()->where('del_flg', '0')->paginate(5);
 
         return view('users/post_list',[
             'posts' => $posts,
@@ -126,7 +123,7 @@ class UsersController extends Controller
 
         Auth::user()->reserve()->save($post);
 
-        $posts = Auth::user()->post()->where('del_flg', '0')->get();
+        $posts = Auth::user()->post()->where('del_flg', '0')->paginate(5);
 
         return view('users/post_list',[
             'posts' => $posts,
@@ -145,7 +142,6 @@ class UsersController extends Controller
         $posts = Auth::user()->post()->where('del_flg', '0')->get();
 
         return view('users/post_edit',[
-            // 'id' => $post,
             'result' => $post,
             'post' => $posts,
         ]);
@@ -166,7 +162,7 @@ class UsersController extends Controller
 
         $post->save(); //saveを実行
 
-        $posts = Auth::user()->post()->where('del_flg', '0')->get();
+        $posts = Auth::user()->post()->where('del_flg', '0')->paginate(5);
 
         return view('users/post_list',[
             'posts' => $posts,
@@ -182,7 +178,7 @@ class UsersController extends Controller
 
         $post->save();
 
-        $posts = Auth::user()->post()->where('del_flg', '0')->get();
+        $posts = Auth::user()->post()->where('del_flg', '0')->paginate(5);
 
         return view('users/post_list',[
             'posts' => $posts,

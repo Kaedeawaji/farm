@@ -32,12 +32,12 @@
     <div class="col-md-5 mx-auto">
         <h1 class="my-2 text-center">牧場一覧</h1>
         
-        <div class="p-5 input-group">
-            <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="キーワードを入力"></input>
-            <span class="input-group-btn input-group-append">
-                <submit type="submit" id="btn-search" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit>
-            </span>
-        </div>  
+        <div class="d-flex justify-content-center">
+            <form action="{{ route('home') }}" method="GET">
+                <input type="text" name="keyword" value="{{ $keyword }}">
+                <input type="submit" value="検索">
+            </form>
+        </div> 
     </div>  
     @foreach($farms as $farm)
 
@@ -64,14 +64,9 @@
         </div>
     </div>
     @endforeach
-    <nav class="p-3">
-        <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">前へ</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">次へ</a></li>
-        </ul>
-    </nav>    
+
+    <div class="d-flex justify-content-center">
+        {{ $farms->links() }}
+    </div>
 </main>
 @endsection('content')

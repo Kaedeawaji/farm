@@ -98,18 +98,8 @@
     </div>   
     @endforeach
 
-    <div class="col-md-8 mx-auto">
-        </div>
-            <nav class="p-3">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">前へ</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">次へ</a></li>
-                </ul>
-            </nav>    
-        </div> 
+    <div class="d-flex justify-content-center">
+        {{ $post->links() }}
     </div>
 </main>
 @endsection('content')

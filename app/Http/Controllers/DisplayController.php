@@ -15,23 +15,24 @@ use Illuminate\Support\Facades\DB;
 class DisplayController extends Controller
 {
     // 牧場一覧表示
-    public function index(Farm $farm) {
-        $plan = new Plan;
+    public function index(Farm $farm, Request $request) {
+        $keyword = $request->input('keyword');
 
+        $query = Farm::query();
 
-        $plans = $plan->where('del_flg', '0')->get();
-        $farms = $farm->where('del_flg', '0')->get();
-        $farm_with_plan = $farm->with('plan')->where('del_flg', '0')->get();
+        if(!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        }
 
-        $employees = $plan
-            ->join('farms','plans.farm_id','=','farms.id')
-            ->where('plans.del_flg', '0')
-            ->get();
-            
+        $farms = $query->paginate(5);
 
-        return view('farm_list',[
-            'farms' => $farms,
-        ]);
+        // $farms = $farm->where('del_flg', '0')->paginate(5);
+
+        // return view('farm_list',[
+        //     'farms' => $farms,
+        //     'keyword' => $posts,
+        // ]);
+        return view('farm_list', compact('farms', 'keyword'));
     }
 
     
@@ -42,14 +43,12 @@ class DisplayController extends Controller
 
 
         $plans = $farm->plan()->where('del_flg', '0')->get();
-        $posts = $farm->post()->where('del_flg', '0')->get();
+        $posts = $farm->post()->where('del_flg', '0')->paginate(5);
 
-// var_dump($posts);
         return view('farm_detail',[
             'farms' => $farm,
             'plan' => $plans,
             'post' => $posts,
-
         ]);
     }
 

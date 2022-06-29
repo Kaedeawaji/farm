@@ -25,7 +25,6 @@ Route::get('/', [DisplayController::class, 'index'])->name('home');
 Route::get('/farm_list/{farm}', [DisplayController::class, 'farm_list'])->name('detail.plan'); //一覧から詳細へ
 
 
-
 Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
     //GETで来たときはフォームを表示する
     //POST（フォーム送信）されたらDBへの登録処理
@@ -123,6 +122,10 @@ Route::get('/shop_edit{farm}', [AdminsController::class, 'shopeditform'])->name(
 Route::post('/shop_edit{farm}', [AdminsController::class, 'shopedit']); //フォーム送信があったとき
 // 事業者 論理削除
 Route::get('/up_shop/{farm}', [AdminsController::class, 'updateshopr'])->name('update.shop');
+// プラン 論理削除
+Route::get('/plan/{plan}', [AdminsController::class, 'deleteplan'])->name('delete.plan'); 
+// 口コミ 論理削除
+Route::get('/post/{post}', [AdminsController::class, 'deletepost'])->name('delete.post'); 
 
 
 });

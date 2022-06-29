@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-// use Illuminate\Support\Facades\Shop\Auth;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Farm;
 use App\User;
 use App\Plan;
-
+use App\Post;
 
 class AdminsController extends Controller
 {
@@ -33,7 +33,7 @@ class AdminsController extends Controller
     // トップページ
     public function index(){
 
-        $user = DB::table('users')->where('del_flg', '0')->get();
+        $user = DB::table('users')->where('del_flg', '0')->paginate(5);
 
         return view('admins.home',[
             'users' => $user,
@@ -45,14 +45,22 @@ class AdminsController extends Controller
 
     
     // ユーザー一覧表示
-    public function UserList(){
+    public function UserList(Request $request){
+        $keyword = $request->input('keyword');
 
-        $user = DB::table('users')->where('del_flg', '0')->get();
+        $query = User::query();
 
-        return view('admins.home',[
-            'users' => $user,
+        if(!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        }
+
+        $users = $query->paginate(5);
+        // $user = DB::table('users')->where('del_flg', '0')->paginate(5);
+        // return view('admins.home',[
+        //     'users' => $user,
     
-        ]);
+        // ]);
+        return view('admins.home', compact('users', 'keyword'));
     }
 
 
@@ -78,7 +86,7 @@ class AdminsController extends Controller
         //保存
         $user->fill($columns)->save();   
 
-        $user = DB::table('users')->where('del_flg', '0')->get();
+        $user = DB::table('users')->where('del_flg', '0')->paginate(5);
 
         return view('admins.home',[
             'users' => $user,
@@ -94,7 +102,7 @@ class AdminsController extends Controller
 
         $user->save();
 
-        $user = DB::table('users')->where('del_flg', '0')->get();
+        $user = DB::table('users')->where('del_flg', '0')->paginate(5);
 
         return view('admins.home',[
             'users' => $user,
@@ -106,14 +114,24 @@ class AdminsController extends Controller
 
     
     //事業者リストの表示
-    public function ShopList(){
-        $farm = new Farm;
+    public function ShopList(Request $request){
 
-        $farms = $farm->where('del_flg', '0')->get();
-        return view('admins/shoplist',[
-            'farms' => $farms,
-    
-        ]);
+        $keyword = $request->input('keyword');
+
+        $query = Farm::query();
+
+        if(!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        }
+
+        $farms = $query->paginate(5);
+
+        // $farms = $farm->where('del_flg', '0')->paginate(5);
+        // return view('admins/shoplist',[
+        //     'farms' => $farms,
+        // ]);
+        return view('farm_list', compact('farms', 'keyword'));
+
     }
 
 
@@ -124,7 +142,7 @@ class AdminsController extends Controller
         $plan = new Plan;
 
         $plans = $farm->plan()->where('del_flg', '0')->get();
-        $posts = $farm->post()->where('del_flg', '0')->get();
+        $posts = $farm->post()->where('del_flg', '0')->paginate(5);
         
 
         // var_dump($plans);
@@ -137,14 +155,69 @@ class AdminsController extends Controller
     }
     
 
+    // 修正必要
+
+
+    //プラン 論理削除
+    public function deleteplan(Plan $plan) {
+        $farm = new Farm;
+        // $post = new Post;
+
+        $plan->del_flg = '1';
+        $plan->timestamps = false;
+        $plan->save();
+
+        $farms = $farm->where('del_flg', '0')->paginate(5);
+
+        
+        return view('admins/shoplist',[
+            'farms' => $farms,
+        ]);
+
+    }
 
 
 
-// 
+    //プラン 論理削除
+    public function deletepost(Post $post) {
+        $farm = new Farm;
+
+        $post->del_flg = '1';
+        // $plan->timestamps = false;
+        $post->save();
+
+        $farms = $farm->where('del_flg', '0')->paginate(5);
+
+        
+        return view('admins/shoplist',[
+            'farms' => $farms,
+        ]);
+
+    }
+    // //口コミ　論理削除
+    // public function updatepost(Post $post) {
+
+    //     $post->del_flg = '1';
+
+    //     $post->save();
+
+    //     $posts = Auth::user()->post()->where('del_flg', '0')->get();
+
+    //     return view('users/post_list',[
+    //         'posts' => $posts,
+    //     ]);
+
+    // }
 
 
 
-    //事業者の編集ボタンクリック
+
+
+
+
+
+
+    //事業者の編集ボタンクリック 
     public function shopeditform(Farm $farm) {
 
         return view('admins/ad_shop_edit',[
@@ -166,7 +239,7 @@ class AdminsController extends Controller
         //保存
         $farm->fill($columns)->save();   
 
-        $farm = DB::table('farms')->where('del_flg', '0')->get();
+        $farm = DB::table('farms')->where('del_flg', '0')->paginate(5);
 
         return view('admins.shoplist',[
             'farms' => $farm,
@@ -182,7 +255,7 @@ class AdminsController extends Controller
 
         $farm->save();
 
-        $farm = DB::table('farms')->where('del_flg', '0')->get();
+        $farm = DB::table('farms')->where('del_flg', '0')->paginate(5);
 
         return view('admins.shoplist',[
             'farms' => $farm,
@@ -190,6 +263,7 @@ class AdminsController extends Controller
 
     }
     
+
 
 
 }

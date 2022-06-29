@@ -29,7 +29,7 @@ class ShopController extends Controller
         $reserve = new Reserve;
 
         // 予約リストの取得
-        $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
+        $reserve = Auth::user()->reserve()->where('del_flg', '0')->paginate(5);
         
         // var_dump($reserve);
         return view('shops.home',[
@@ -42,7 +42,7 @@ class ShopController extends Controller
         $farm = new Farm;
 
         // $farms = $farm->plan()->where('del_flg', '0')->get();
-        $plans = Auth::user()->plan()->where('del_flg', '0')->get();
+        $plans = Auth::user()->plan()->where('del_flg', '0')->paginate(5);
         $with = $farm->with('plan')->where('del_flg', '0')->get();
 
         // var_dump($plans);
