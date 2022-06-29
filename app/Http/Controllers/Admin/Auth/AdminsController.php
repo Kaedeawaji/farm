@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+// use Illuminate\Support\Facades\Shop\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Farm;
 use App\User;
-
+use App\Plan;
 
 
 class AdminsController extends Controller
@@ -114,16 +115,35 @@ class AdminsController extends Controller
     
         ]);
     }
+
+
+
     //事業者詳細画面へ
     public function ShopDetail(Farm $farm){
 
-        $farms = $farm->where('del_flg', '0')->get();
+        $plan = new Plan;
+
+        $plans = $farm->plan()->where('del_flg', '0')->get();
+        $posts = $farm->post()->where('del_flg', '0')->get();
+        
+
+        // var_dump($plans);
         return view('admins/shopdetail',[
             'farms' => $farm,
-    
+            'plan' => $plans,
+            'post' => $posts,
+
         ]);
     }
     
+
+
+
+
+// 
+
+
+
     //事業者の編集ボタンクリック
     public function shopeditform(Farm $farm) {
 

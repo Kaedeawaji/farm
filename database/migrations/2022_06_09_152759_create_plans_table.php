@@ -15,6 +15,7 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('farm_id');
             $table->string('name');
             $table->integer('price');
             $table->text('detail');

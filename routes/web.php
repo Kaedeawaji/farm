@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\Shop\ShopController;
+use App\Http\Controllers\Shop\Auth\ShopController;
 use App\Http\Controllers\Admin\Auth\AdminsController;
 
 
@@ -34,21 +34,18 @@ Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
     //予約関連
     //詳細から予約フォームへ
     Route::get('/farm/{plan}detail', [DisplayController::class, 'farm_detail'])->name('farm.detail');
-    Route::get('/reserve_form', [UsersController::class, 'reserveForm'])->name('reserve.form'); //予約フォームアクセス
-    Route::post('/reserve_form', [UsersController::class, 'reserve']); //フォーム送信があったとき
+    Route::get('/reserve_form{plan}', [UsersController::class, 'reserveForm'])->name('reserve.form'); //予約フォームアクセス
+    Route::post('/reserve_form{plan}', [UsersController::class, 'reserve']); //フォーム送信があったとき
     //user予約listを表示
-    Route::get('/reserve_form_comp', [UsersController::class, 'reserveFormComp'])->name('reserve_comp.form'); //戻る
+    Route::get('/reserve_form_comp', [UsersController::class, 'reserveList'])->name('reserve.list'); //戻る
     //予約キャンセル 論理削除
     Route::get('/update_res/{reserve}', [UsersController::class, 'updatereserve'])->name('update.reserve');
-    //user予約listを表示
-    // Route::get('/update_comp', [UsersController::class, 'update_Comp']) //戻る
-
     
 
     //口コミ関連
     // 投稿
-    Route::get('/post_form/{farm}', [UsersController::class, 'postForm'])->name('post.form'); //投稿フォームアクセス
-    Route::post('/post_form/{farm}', [UsersController::class, 'post']); //フォーム送信があったとき
+    Route::get('/post_form/{plan}', [UsersController::class, 'postForm'])->name('post.form'); //投稿フォームアクセス
+    Route::post('/post_form/{plan}', [UsersController::class, 'post']); //フォーム送信があったとき
     // 編集
     Route::get('/edit_form/{post}', [UsersController::class, 'editPostForm'])->name('edit.post');  //編集表示
     Route::post('/edit_form/{post}', [UsersController::class, 'editPost']);    
@@ -75,12 +72,30 @@ Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
     Route::prefix('shop')->namespace('shop')->name('shop.')->group (function() {
         Auth::routes();
         
-        // ログイン後
-        Route::get('/home', 'Auth\ShopController@index')->name('shop_home'); 
+    // ログイン後
+    Route::get('/home', 'Auth\ShopController@index')->name('shop_home'); 
+
+    // 予約一覧画面へ　listを表示
+    Route::get('/res_list', [ShopController::class, 'ReserveList'])->name('res_list'); //予約一覧画面へ
+    // プラン一覧画面へ　listを表示
+    Route::get('/plan_list', [ShopController::class, 'PlanList'])->name('plan_list'); //プラン一覧画面へ
+    // 登録情報編集
+    Route::get('/shop_edit_form', [ShopController::class, 'ShopEditForm'])->name('shop_edit_form');
+    Route::post('/shop_edit_form', [ShopController::class, 'ShopEdit']); //フォーム送信があったとき
+
+    // プラン追加
+    Route::get('/add_plan', [ShopController::class, 'AddPlan'])->name('add_plan'); 
+    Route::post('/add_plan', [ShopController::class, 'AddPlanFprm'])->name('plan_form'); 
+    // 論理削除
+    Route::get('/update_plan/{plan}', [ShopController::class, 'updateplan'])->name('update.plan'); 
+
 
 
     });
 // });
+
+
+
 
 
 // 管理者専用

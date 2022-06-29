@@ -1,56 +1,58 @@
-<!doctype html>
-<html lang="ja">
-  <head>
-    <!-- 文字コード・画面表示の設定 -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
-    <!-- Bootstrap CSSの読み込み -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
- 
-    <title>パスワードリセット</title>
-  </head>
-    <body>
+@extends('layouts.shop_layout')
+@section('content')
     <main class="py-4">
         <div class="col-md-5 mx-auto">
-
-            <div class="card">
-                <div class="card-header">
-                    <h4 class='text-center'>体験プラン追加</h1>
-                </div>
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('shop.shop_home') }}">予約一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('shop.plan_list') }}">プラン一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('shop.shop_edit_form') }}">登録情報編集</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-header">
+                <h4 class='text-center'>体験プラン追加</h1>
+            </div>
+            <div class="card-body">
                 <div class="card-body">
-                    <div class="card-body">
                     <div class = 'panel-body'>
-                            @if($errors->any())
-                            <div class='alert alert-danger'>
-                                <ul>
-                                    @foreach($errors->all() as $message)
-                                    <li>{{ $message }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            @endif
-                        </div>                                         
+                        @if($errors->any())
+                        <div class='alert alert-danger'>
+                            <ul>
+                                @foreach($errors->all() as $message)
+                                <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                    </div>                                         
 
-                        <form action="" method="post">
-                            @csrf
-                            <label for='name'>プラン名</label>
-                                <input type='text' class='form-control' name='name'/>
-                                <label for='amount'>料金</label>
-                                <input type='text' class='form-control' name='amount' value="{{ old('amount') }}"/>
-                                <label for='comment' class='mt-2'>詳細</label>
-                                <textarea class='form-control' name='comment'>{{ old('comment') }}</textarea>
+                    <form action="" method="post">
+                    @csrf
+                        <div class="form-group">
+                            <label for="name">プラン名</label>
+                            <input type="text" class="form-control" id="name" name="name" />
+                        </div>
 
-
-
-                            <div class='row justify-content-center'>
-                                <button type='submit' class='btn btn-primary w-25 mt-3'>追加</button>
-                            </div> 
-                        </form>
-                    </div>
+                        <div class="form-group">
+                            <label for="price">料金</label>
+                            <input type="price" class="form-control" id="price" placeholder="" name="price">
+                        </div>
+                        <div class="form-group">
+                            <label for="detail">詳細</label>
+                            <input type="detail" class="form-control" id="detail" placeholder="" name="detail">
+                        </div>
+                        <div class="section1 text-center">
+                            <button type="submit" class="btn btn-primary">追加する</button>
+                        </div>
+                    </form> 
                 </div>
             </div>
         </div>
     </main>
-    </body>
-</html>
+    @endsection('content')

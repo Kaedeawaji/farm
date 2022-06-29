@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('reserve_comp.form') }}">予約一覧</a>
+                        <a class="nav-link active" href="{{ route('reserve.list') }}">予約一覧</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('post.list') }}">口コミ一覧</a>
@@ -39,8 +39,8 @@
                 </thead>
                 <tbody>
                         <tr>
-                            <th scope='col'>{{ $reserve['name'] }}</th>
-                            <th scope='col'>{{ $reserve['name'] }} </th>
+                            <th scope='col'>{{ $reserve['farm']['name'] }}</th>
+                            <th scope='col'>{{ $reserve['plan']['name'] }} </th>
                             <th scope='col'>{{ $reserve['day'] }}</th>
                             <th scope='col'>{{ $reserve['time'] }}</th>
                             <th scope='col'>{{ $reserve['body'] }}</th>

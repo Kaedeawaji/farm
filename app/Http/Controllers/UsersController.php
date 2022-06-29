@@ -17,32 +17,39 @@ class UsersController extends Controller
 {
     // 予約フォーム表示
     public function reserveForm(){
-        
+        // $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
+
         return view('users/reserve',[
-            // 'plans' => $all,
+            // 'reserves' => $reserve,
         ]);
     }
 
-    // 修正必要！！
     // フォーム送信があった時POST
-    public function reserve(Request $request){
+    public function reserve(Request $request, Plan $plan){
         $reserve = new Reserve;
+        // $plan = new Plan;
+        $farm = new Farm;
+
 
         $colums = ['day', 'time', 'body'];
         foreach($colums as $colum){
             $reserve->$colum = $request->$colum;
         }
         // とりあえずIDを指定している。そのプランのIDを渡せるように
-        $reserve->plan_id = 1;
+        $reserve->plan_id = $plan->id;
+        $reserve->farm_id = $plan->farm_id;
+
+        $reserve->user_id = Auth::user()->id;
+
 
         Auth::user()->reserve()->save($reserve);
-        
+
         return view('users/reserve_comp',[
         ]);
     }
 
-    // 戻る→予約一覧画面へ 予約フォーム表示?
-    public function reserveFormComp(Farm $farm){
+    // 戻る→予約一覧画面へ 予約フォーム表示
+    public function reserveList(){
         $plan = new Plan;
 
         $all = $plan->all()->toArray();
@@ -51,8 +58,6 @@ class UsersController extends Controller
         // 予約リストの取得
         $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
         $farms = $farm->plan()->where('del_flg', '0')->get();
-
-        var_dump($farms);
 
         return view('users/user_reslist',[
             'reserves' => $reserve,
@@ -81,6 +86,8 @@ class UsersController extends Controller
 
 
 
+    
+
 // 口コミ投稿一覧表示
     public function postlist(){
 
@@ -104,18 +111,26 @@ class UsersController extends Controller
     }
 
     // 口コミ投稿 post
-    public function post(Request $request, Farm $farm){
+    public function post(Request $request, Plan $plan){
         $post = new Post;
+        $farm = new Farm;
+        $reserve = new Reserve;
 
         $colums = ['star', 'title', 'img', 'body'];
         foreach($colums as $colum){
             $post->$colum = $request->$colum;
         }
 
-        $post->farm_id = $farm->id;
+        $post->farm_id = $plan->farm_id;
+        $post->plan_id = $plan->id;
+
         Auth::user()->reserve()->save($post);
 
-        return redirect('/');
+        $posts = Auth::user()->post()->where('del_flg', '0')->get();
+
+        return view('users/post_list',[
+            'posts' => $posts,
+        ]);
 
 
     }
@@ -201,7 +216,8 @@ class UsersController extends Controller
         //保存
         $user->fill($user_form)->save();   
 
-        return redirect('/');    }
+        return redirect('/');    
+    }
         
         
         

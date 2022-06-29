@@ -5,7 +5,7 @@
             <div class="col-md-5 mx-auto">
                 <div class="container">
                     <h1 class="my-2 text-center">予約フォーム</h1>
-                    <form action="{{ route('reserve.form') }}" method="post">
+                    <form action="" method="post">
                         @csrf
                         <div class="container">
                             <div class="form-group">

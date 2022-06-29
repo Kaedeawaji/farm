@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Plan;
 use App\Farm;
+use App\Post;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -16,38 +18,38 @@ class DisplayController extends Controller
     public function index(Farm $farm) {
         $plan = new Plan;
 
-        // $all = $farm->all()->toArray();
 
         $plans = $plan->where('del_flg', '0')->get();
         $farms = $farm->where('del_flg', '0')->get();
         $farm_with_plan = $farm->with('plan')->where('del_flg', '0')->get();
 
-        // $all = $farm->all()->toArray();
-        
-        $user_contacts = \DB::table('farms')
-            // ->select('farms.id', 'plans.name', 'farms.name')
-            ->join('plans', 'farms.id', '=', 'plans.farm_id')
+        $employees = $plan
+            ->join('farms','plans.farm_id','=','farms.id')
+            ->where('plans.del_flg', '0')
             ->get();
-
-        // $employees = $plan
-        //     ->join('farms','plans.farm_id','=','farms.id')
-        //     ->get();
-
             
-// var_dump($farms);
 
         return view('farm_list',[
-            'farms' => $farm_with_plan,
+            'farms' => $farms,
         ]);
     }
 
     
-    // 詳細ボタン  IDで受け取り
+    // 詳細ボタン  IDで受け取った牧場のプランを表示させたい
     public function farm_list(Farm $farm){
-        // var_dump($farm);
+        $plan = new Plan;
+        $post = new Post;
 
+
+        $plans = $farm->plan()->where('del_flg', '0')->get();
+        $posts = $farm->post()->where('del_flg', '0')->get();
+
+// var_dump($posts);
         return view('farm_detail',[
             'farms' => $farm,
+            'plan' => $plans,
+            'post' => $posts,
+
         ]);
     }
 
