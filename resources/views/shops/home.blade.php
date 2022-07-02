@@ -41,7 +41,6 @@
                                     <th scope='col'>{{ $reserve['day'] }}</th>
                                     <th scope='col'>{{ $reserve['time'] }}</th>
                                     <th scope='col'>{{ $reserve['body'] }}</th>
-
                                     <th scope='col'>
                                         <a href="{{ route('update.reserve', ['reserve' => $reserve['id']]) }}">キャンセル</a>
                                     </th>
@@ -51,10 +50,11 @@
                 </div>
             </div>
             @endforeach
-            <div class="d-flex justify-content-center">
-                {{ $reserves->links() }}
-            </div>        
         </div> 
+        <div class="d-flex justify-content-center">
+            {{ $reserves->links() }}
+        </div>
+
     </div> 
 </main>
 @endsection('content')

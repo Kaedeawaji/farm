@@ -23,20 +23,21 @@ Auth::routes();
 // 全員見れるページ
 Route::get('/', [DisplayController::class, 'index'])->name('home');
 Route::get('/farm_list/{farm}', [DisplayController::class, 'farm_list'])->name('detail.plan'); //一覧から詳細へ
+Route::get('/question', [DisplayController::class, 'question'])->name('question'); //質問画面へ
 
 
 Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
     //GETで来たときはフォームを表示する
     //POST（フォーム送信）されたらDBへの登録処理
 
-
     //予約関連
     //詳細から予約フォームへ
     Route::get('/farm/{plan}detail', [DisplayController::class, 'farm_detail'])->name('farm.detail');
     Route::get('/reserve_form{plan}', [UsersController::class, 'reserveForm'])->name('reserve.form'); //予約フォームアクセス
     Route::post('/reserve_form{plan}', [UsersController::class, 'reserve']); //フォーム送信があったとき
-    //user予約listを表示
-    Route::get('/reserve_form_comp', [UsersController::class, 'reserveList'])->name('reserve.list'); //戻る
+    //user予約listを表示　navバーから
+    Route::get('/reserve', [UsersController::class, 'resList'])->name('reslist'); //戻る
+
     //予約キャンセル 論理削除
     Route::get('/update_res/{reserve}', [UsersController::class, 'updatereserve'])->name('update.reserve');
     

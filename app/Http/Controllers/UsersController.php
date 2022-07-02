@@ -46,9 +46,10 @@ class UsersController extends Controller
         ]);
     }
 
-    // 戻る→予約一覧画面へ 予約フォーム表示
-    public function reserveList(){
+    public function resList(){
         $plan = new Plan;
+        $farm = new Farm;
+
 
         $all = $plan->all()->toArray();
         $farmall = $farm->all()->toArray();
@@ -63,6 +64,7 @@ class UsersController extends Controller
             'farm' => $farmall
         ]);
     }
+
 
     // 予約 論理削除  update  
     public function updatereserve(Reserve $reserve) {
@@ -112,26 +114,29 @@ class UsersController extends Controller
         $post = new Post;
         $farm = new Farm;
         $reserve = new Reserve;
+        
+        $titlename=$request->img->getClientOriginalName();
 
-        $colums = ['star', 'title', 'img', 'body'];
-        foreach($colums as $colum){
-            $post->$colum = $request->$colum;
+        $img = $request->img->storeAs('',$titlename, 'public');
+        if ($img) {
+            // DBに登録する処理
+            Post::create([
+                'img' => $img,
+                'star' => $request->star,
+                'title' => $request->title,
+                'body' => $request->body,
+                'farm_id' => $plan->farm_id,
+                'plan_id' => $plan->id,
+                'user_id' => Auth::user()->id
+            ]);
         }
 
-        $post->farm_id = $plan->farm_id;
-        $post->plan_id = $plan->id;
-
-        Auth::user()->reserve()->save($post);
-
-        $posts = Auth::user()->post()->where('del_flg', '0')->paginate(5);
+        $post = Auth::user()->post()->where('del_flg', '0')->paginate(5);
 
         return view('users/post_list',[
-            'posts' => $posts,
+            'posts' => $post,
         ]);
-
-
     }
-
 
 
     //口コミ編集　元の情報表示
@@ -150,17 +155,28 @@ class UsersController extends Controller
 
 
     //口コミ編集
-    public function editpost(Post $post, Request $request) {
+    public function editpost(Post $post, Request $request) {        
+        $plan = new Plan;
+        $farm_id = $post->farm_id;
+        $plan_id = $post->plan_id;
 
-        $columns = ['star', 'title', 'img', 'body'];
+    
+        $titlename=$request->img->getClientOriginalName();
 
-        foreach($columns as $column){
-            $post->$column = $request->$column;
+        $img = $request->img->storeAs('',$titlename, 'public');
+        if ($img) {
+            // DBに登録する処理
+            $post->update([
+                'img' => $img,
+                'star' => $request->star,
+                'title' => $request->title,
+                'body' => $request->body,
+                'farm_id' => $farm_id,
+                'plan_id' => $plan_id,
+                'user_id' => Auth::user()->id
+            ]);
         }
-        //ログインしたユーザーのIDも登録してあげる
-        $post->user_id = Auth::user()->id;
 
-        $post->save(); //saveを実行
 
         $posts = Auth::user()->post()->where('del_flg', '0')->paginate(5);
 
@@ -216,6 +232,6 @@ class UsersController extends Controller
     }
         
         
-        
+
 
 }

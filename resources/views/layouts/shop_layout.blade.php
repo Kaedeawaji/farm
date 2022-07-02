@@ -58,7 +58,7 @@
         </div>
         <footer>
             <div class="card-footer text-center">
-                <a class="text-reset" href="question.blade.php" role="button">よくある質問</a>
+                <a class="text-reset" href="{{ route('question') }}" role="button">よくある質問</a>
             </div>
         </footer>
     </body>

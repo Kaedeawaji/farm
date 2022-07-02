@@ -6,7 +6,7 @@
                 
                 <div class="container">
                     <h1 class="my-2 text-center">口コミ編集</h1>
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                     @csrf
 
                         <section>
@@ -73,11 +73,12 @@
                             <label for="title">タイトル</label>
                             <input type="text" class="form-control" id="title" name="title" value="{{ $result['title'] }}"/>
 
-                            <label for="img">画像選択</label>
-                            <input type="file" class="form-control-file" id="img" value="{{ $result['img'] }}">
+                            <label for="inputFile">画像選択</label>
+                            <input type="file" class="form-control-file" id="inputFile" name="img" value="{{ $result['img'] }}">
                             
                             <label for='body' class='mt-2'>内容</label>
                             <textarea class='form-control' name='body'>{{ $result['body'] }}</textarea>
+
                             </div>
                             <div class="section1 text-center">
                                 <button type="submit" class="btn btn-primary">編集する</button>

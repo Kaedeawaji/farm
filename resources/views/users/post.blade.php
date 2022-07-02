@@ -69,10 +69,13 @@
 
                         <label for="title">タイトル</label>
                         <input type="text" class="form-control" name="title" value="" />
-                            <label for="inputFile">画像選択</label>
-                            <input type="file" class="form-control-file" id="inputFile" name="post_img">
-                            <label for='body' class='mt-2'>内容</label>
-                            <textarea type="text" class='form-control' name='body'>{{ old('comment') }}</textarea>
+
+                        <label for="inputFile">画像選択</label>
+                        <input type="file" class="form-control-file" id="inputFile" name="img">
+
+                        <label for='body' class='mt-2'>内容</label>
+                        <textarea type="text" class='form-control' name='body'>{{ old('comment') }}</textarea>
+
                         <div class="section1 text-center p-5" >
                             <button type="submit" class="btn btn-primary">投稿する</button>
                         </div>

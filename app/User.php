@@ -49,6 +49,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+
         public function password_reset(){
         return $this->belongsTo('App\Reserve', 'reserve_id', 'id');
     }

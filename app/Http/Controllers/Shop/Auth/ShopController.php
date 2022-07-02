@@ -131,7 +131,7 @@ class ShopController extends Controller
         $user->fill($user_form)->save();   
 
 
-        $reserve = Auth::user()->plan()->where('del_flg', '0')->get();
+        $reserve = Auth::user()->plan()->where('del_flg', '0')->paginate(5);
 
         return view('shops.home',[
             'reserves' => $reserve,

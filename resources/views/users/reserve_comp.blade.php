@@ -10,7 +10,7 @@
                             <div class="card-body text-center">
                                 <p>予約ありがとうございました。<br>送信完了しました。</p>
                                 <div class="section1 text-center">
-                                    <a href="{{ route('reserve_comp.form') }}">
+                                    <a href="{{ route('reslist') }}">
                                         <button type="submit" href="farm_list.php" class="btn btn-primary">戻る</button>
                                     </a>
                                 </div>

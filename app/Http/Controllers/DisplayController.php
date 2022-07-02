@@ -60,6 +60,11 @@ class DisplayController extends Controller
     }
 
 
+    public function question(){
+
+        return view('question',[
+        ]);
+    }
 
 
 

@@ -5,7 +5,7 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('reserve.list') }}">予約一覧</a>
+                        <a class="nav-link" href="{{ route('reslist') }}">予約一覧</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('post.list') }}">口コミ一覧</a>
@@ -24,21 +24,26 @@
                 <div class="card-body">
                     <tbody>
                         <tr>
-                            <th scope='col'>牧場名：</th>
-                            　
-                            <th scope='col'>タイトル：{{ $post['title'] }}</th>
-                            　
-                            <th scope='col'>内容：{{ $post['body'] }}</th>
-                            　
-                            <th scope='col'>画像：</th>
+                            <div class="rating">
+                                <section>
+                                    <th scope='col'>{{ $post['star'] }}</th>
+                                        
+                                    <div class="d-flex justify-content-around">
+                                    <th scope='col'>牧場名：</th><br>
+                                    <th scope='col'>タイトル：{{ $post['title'] }}</th><br>
+                                    <th scope='col'>内容：{{ $post['body'] }}</th><br>
+
+                                    <img class="text-right" src="{{ Storage::url($post->img) }}" width="25%">
+                                </section>   
+                            </div>        
+
                         </tr>
+
+                        <div class="row justify-content-around ">
+                            <a type='submit' class="btn btn-primary w-25 m-3" href="{{ route('edit.post', ['post' => $post['id']]) }}" role="button">編集</a>
+                            <a type='submit' class="btn btn-primary w-25 m-3" href="{{ route('update.post', ['post' => $post['id']]) }}" role="button">削除</a>
+                        </div>
                     </tbody>
-                    <div class="row justify-content-around">
-                        <a href="{{ route('edit.post', ['post' => $post['id']]) }}">
-                        <button class="btn btn-secondary">編集</button></a>
-                        <a href="{{ route('update.post', ['post' => $post['id']]) }}">
-                        <button class="btn btn-secondary">削除</button></a>
-                    </div>
                 </div>        
             </div>
             @endforeach

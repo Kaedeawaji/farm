@@ -10,7 +10,7 @@ class Post extends Model
 
     protected $table = 'posts'; 
 
-    protected $fillable = ['title','star','body', 'img', 'del_flg'];
+    protected $fillable = ['title','star','body', 'img', 'del_flg', 'user_id','farm_id','plan_id' ];
     //このカラムは書き換えOKという指定。（エラーが出る）     
 
 

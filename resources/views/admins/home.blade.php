@@ -18,7 +18,7 @@
     <div class="card-body">
         <div class="d-flex justify-content-center">
             <form action="{{ route('user_list') }}" method="GET">
-                <input type="text" name="keyword" value="{{ $keyword }}">
+                <input type="text" name="keyword" value="">
                 <input type="submit" value="検索">
             </form>
         </div> 
