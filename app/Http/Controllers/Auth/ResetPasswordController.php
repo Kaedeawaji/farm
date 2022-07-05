@@ -27,4 +27,14 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function send(){
+
+    	$data = [];
+
+    	Mail::send('emails.test', $data, function($message){
+    	    $message->to('abc987@example.com', 'Test')
+            ->subject('This is a test mail');
+    	});
+    }
 }

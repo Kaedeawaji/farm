@@ -20,21 +20,31 @@
                     <div class="container">
                         <h1 class="my-2 text-center">登録情報編集</h1>
                     </div>  
+                    @if($errors->any())
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
 
                     <form action="" method="post">
                     @csrf
                         <div class="form-group">
                             <label for="name">ユーザー名</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" />
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name ) }}" />
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">メールアドレス</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email" value="{{ $user->email }}">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email" value="{{ old('email', $user->email ) }}">
                         </div>
                         <div class="form-group">
                             <label for="tel">電話番号</label>
-                            <input type="tel" class="form-control" id="tel" placeholder="" name="tel" value="{{ $user->tel }}">
+                            <input type="tel" class="form-control" id="tel" placeholder="" name="tel" value="{{ old('tel', $user->tel ) }}">
                         </div>
                         <div class="section1 text-center">
                             <button type="submit" class="btn btn-primary">編集する</button>

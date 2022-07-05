@@ -128,8 +128,9 @@ Route::get('/plan/{plan}', [AdminsController::class, 'deleteplan'])->name('delet
 // 口コミ 論理削除
 Route::get('/post/{post}', [AdminsController::class, 'deletepost'])->name('delete.post'); 
 
-
 });
+
+// });
 
 
 
@@ -144,16 +145,19 @@ Route::get('/post/{post}', [AdminsController::class, 'deletepost'])->name('delet
 
 
 //パスワードリセット
-Route::prefix('password')->group (function() {
+// Route::prefix('password')->group (function() {
 
-    Route::get('/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+//     Route::get('/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+//     Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+//     Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+//     Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
     
 
 
-});
+// });
 
-
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');

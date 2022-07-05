@@ -24,19 +24,15 @@
                 <div class="card-body">
                     <tbody>
                         <tr>
-                            <div class="rating">
-                                <section>
-                                    <th scope='col'>{{ $post['star'] }}</th>
-                                        
-                                    <div class="d-flex justify-content-around">
-                                    <th scope='col'>牧場名：</th><br>
-                                    <th scope='col'>タイトル：{{ $post['title'] }}</th><br>
-                                    <th scope='col'>内容：{{ $post['body'] }}</th><br>
+                            <span class="star5_rating" data-rate="{{ $post['star'] }}"></span>
 
-                                    <img class="text-right" src="{{ Storage::url($post->img) }}" width="25%">
-                                </section>   
+                            <div class="d-flex justify-content-around">
+                                <th scope='col'>牧場名：</th><br>
+                                <th scope='col'>タイトル：{{ $post['title'] }}</th><br>
+                                <th scope='col'>内容：{{ $post['body'] }}</th><br>
+
+                                <img class="text-right" src="{{ Storage::url($post->img) }}" width="25%">
                             </div>        
-
                         </tr>
 
                         <div class="row justify-content-around ">

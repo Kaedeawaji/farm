@@ -115,6 +115,9 @@
             <div class="m-3 card">
                 <div class="card-body">
                     <tbody>
+                    <span class="star5_rating" data-rate="{{ $posts['star'] }}"></span>
+                    <div class="d-flex justify-content-around">
+
                         <tr>
                             <th scope='col'>牧場名：</th>
                             　
@@ -126,6 +129,8 @@
 
                             <img class="float-right" src="{{ Storage::url($posts->img) }}" width="25%">
                         </tr>
+                        </div>        
+
                     </tbody>
                 </div>        
             </div>

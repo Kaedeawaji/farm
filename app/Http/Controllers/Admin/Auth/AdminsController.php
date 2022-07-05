@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin\Auth;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserValidate;
+use App\Http\Requests\ShopValidate;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -73,7 +76,7 @@ class AdminsController extends Controller
     }
         
     // 登録情報編集　update 保存
-    public function useredit(Request $request, User $user) {
+    public function useredit(UserValidate $request, User $user) {
 
         $columns = ['name', 'email', 'tel'];
         foreach($columns as $column) {
@@ -130,7 +133,7 @@ class AdminsController extends Controller
         // return view('admins/shoplist',[
         //     'farms' => $farms,
         // ]);
-        return view('farm_list', compact('farms', 'keyword'));
+        return view('admins/shoplist', compact('farms', 'keyword'));
 
     }
 
@@ -226,7 +229,7 @@ class AdminsController extends Controller
     }
         
     // 事業者登録情報編集　update 保存
-    public function shopedit(Request $request, Farm $farm) {
+    public function shopedit(ShopValidate $request, Farm $farm) {
 
         $columns = ['name', 'email', 'tel', 'address'];
         foreach($columns as $column) {

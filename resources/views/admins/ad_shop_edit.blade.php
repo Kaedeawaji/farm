@@ -19,23 +19,34 @@
     <h1 class="my-2">事業者登録情報編集</h1>
         <div class="col-md-5 mx-auto text-left">
             <div class="container">
+            @if($errors->any())
+            <div class='alert alert-danger'>
+                <ul>
+                    @foreach($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+
                 <form action="" method="post">
                 @csrf
                     <div class="form-group">
                         <label for="name">事業者名</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $farm->name }}" />
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $farm->name ) }}" />
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">メールアドレス</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="" value="{{ $farm->email }}">
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="" value="{{ old('email', $farm->email) }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputtel">電話番号</label>
-                        <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" placeholder="" value="{{ $farm->tel }}">
+                        <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" placeholder="" value="{{ old('tel', $farm->tel) }}">
                     </div>            
                     <div class="form-group">
                         <label for="address">住所</label>
-                        <input type="address" class="form-control" id="address" name="address" value="{{ $farm->address }}" />
+                        <input type="address" class="form-control" id="address" name="address" value="{{ old('address', $farm->address) }}" />
                     </div>
 
                     <div class="section1 text-center">

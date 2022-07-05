@@ -6,6 +6,16 @@
                 
                 <div class="container">
                     <h1 class="my-2 text-center">口コミ編集</h1>
+                    @if($errors->any())
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
                     <form action="" method="post" enctype="multipart/form-data">
                     @csrf
 
@@ -71,13 +81,13 @@
 
                         <div class="form-group">
                             <label for="title">タイトル</label>
-                            <input type="text" class="form-control" id="title" name="title" value="{{ $result['title'] }}"/>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $result->title ) }}"/>
 
                             <label for="inputFile">画像選択</label>
-                            <input type="file" class="form-control-file" id="inputFile" name="img" value="{{ $result['img'] }}">
+                            <input type="file" class="form-control-file" id="inputFile" name="img" value="{{ old('img', $result->img) }}">
                             
                             <label for='body' class='mt-2'>内容</label>
-                            <textarea class='form-control' name='body'>{{ $result['body'] }}</textarea>
+                            <textarea class='form-control' name='body'>{{ old('body', $result->body) }}</textarea>
 
                             </div>
                             <div class="section1 text-center">

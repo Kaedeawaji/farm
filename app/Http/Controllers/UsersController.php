@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostValidate;
+use App\Http\Requests\ReserveValidate;
+use App\Http\Requests\UserValidate;
 
 use App\User;
 use App\Farm;
@@ -23,7 +26,7 @@ class UsersController extends Controller
     }
 
     // フォーム送信があった時POST
-    public function reserve(Request $request, Plan $plan){
+    public function reserve(ReserveValidate $request, Plan $plan){
         $reserve = new Reserve;
         // $plan = new Plan;
         $farm = new Farm;
@@ -110,16 +113,26 @@ class UsersController extends Controller
     }
 
     // 口コミ投稿 post
-    public function post(Request $request, Plan $plan){
+    public function post(PostValidate $request, Plan $plan){
         $post = new Post;
         $farm = new Farm;
         $reserve = new Reserve;
-        
-        $titlename=$request->img->getClientOriginalName();
 
-        $img = $request->img->storeAs('',$titlename, 'public');
-        if ($img) {
+        if ($request->img === null) {
             // DBに登録する処理
+            Post::create([
+                'img' => $request->img,
+                'star' => $request->star,
+                'title' => $request->title,
+                'body' => $request->body,
+                'farm_id' => $plan->farm_id,
+                'plan_id' => $plan->id,
+                'user_id' => Auth::user()->id
+            ]);
+        }else {
+            $titlename=$request->img->getClientOriginalName();
+            $img = $request->img->storeAs('',$titlename, 'public');
+            
             Post::create([
                 'img' => $img,
                 'star' => $request->star,
@@ -155,17 +168,27 @@ class UsersController extends Controller
 
 
     //口コミ編集
-    public function editpost(Post $post, Request $request) {        
+    public function editpost(Post $post, PostValidate $request) {        
         $plan = new Plan;
         $farm_id = $post->farm_id;
         $plan_id = $post->plan_id;
 
-    
-        $titlename=$request->img->getClientOriginalName();
 
-        $img = $request->img->storeAs('',$titlename, 'public');
-        if ($img) {
+        if ($request->img === null) {
             // DBに登録する処理
+            $post->update([
+                'img' => $request->img,
+                'star' => $request->star,
+                'title' => $request->title,
+                'body' => $request->body,
+                'farm_id' => $farm_id,
+                'plan_id' => $plan_id,
+                'user_id' => Auth::user()->id
+            ]);
+        }else {
+            $titlename=$request->img->getClientOriginalName();
+            $img = $request->img->storeAs('',$titlename, 'public');
+
             $post->update([
                 'img' => $img,
                 'star' => $request->star,
@@ -219,7 +242,7 @@ class UsersController extends Controller
     }
 
     // 登録情報編集　update 保存
-    public function UserEdit(Request $request) {
+    public function UserEdit(UserValidate $request) {
 
         $user_form = $request->all();
         $user = Auth::user();

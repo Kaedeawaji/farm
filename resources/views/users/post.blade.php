@@ -5,6 +5,16 @@
             <div class="col-md-5 mx-auto">
                 <div class="container">
                     <h1 class="my-2 text-center">口コミ投稿</h1>
+                    @if($errors->any())
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
                     <form action="" method="post" enctype='multipart/form-data'>
                     @csrf
                         <section>
@@ -68,13 +78,13 @@
                         </section>                        
 
                         <label for="title">タイトル</label>
-                        <input type="text" class="form-control" name="title" value="" />
+                        <input type="text" class="form-control" name="title" value="{{ old('title') }}" />
 
                         <label for="inputFile">画像選択</label>
-                        <input type="file" class="form-control-file" id="inputFile" name="img">
+                        <input type="file" class="form-control-file" id="inputFile" name="img" value="{{ old('img') }}">
 
                         <label for='body' class='mt-2'>内容</label>
-                        <textarea type="text" class='form-control' name='body'>{{ old('comment') }}</textarea>
+                        <textarea type="text" class='form-control' name='body'>{{ old('body') }}</textarea>
 
                         <div class="section1 text-center p-5" >
                             <button type="submit" class="btn btn-primary">投稿する</button>

@@ -53,8 +53,8 @@
     </div>  
 
         
-    @foreach ($post as $posts)
-    <div class="m-3 card">
+    <!-- @foreach ($post as $posts) -->
+    <!-- <div class="m-3 card">
         <div class="card-body text-center">
             <table class='table'>
                 <thead>
@@ -82,7 +82,32 @@
             </table>
         </div>
     </div>   
-    @endforeach
+    @endforeach -->
+
+    @foreach ($post as $posts)
+            <div class="m-3 card">
+                <div class="card-body">
+                    <tbody>
+                        <tr>
+                            <span class="star5_rating" data-rate="{{ $posts['star'] }}"></span>
+
+                            <div class="d-flex justify-content-around">
+                                <th scope='col'>牧場名：</th><br>
+                                <th scope='col'>タイトル：{{ $posts['title'] }}</th><br>
+                                <th scope='col'>内容：{{ $posts['body'] }}</th><br>
+                                <img class="text-right" src="{{ Storage::url($posts->img) }}" width="25%">
+                                <th scope='col'>
+                                    <a href="{{ route('delete.post', ['post' => $posts->id]) }}">削除</a>
+                                </th>
+                            </div>        
+                        </tr>
+
+
+                    </tbody>
+                </div>        
+            </div>
+            @endforeach
+
 
     <div class="d-flex justify-content-center">
         {{ $post->links() }}

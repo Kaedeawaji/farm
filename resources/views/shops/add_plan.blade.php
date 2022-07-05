@@ -36,16 +36,16 @@
                     @csrf
                         <div class="form-group">
                             <label for="name">プラン名</label>
-                            <input type="text" class="form-control" id="name" name="name" />
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" />
                         </div>
 
                         <div class="form-group">
                             <label for="price">料金</label>
-                            <input type="price" class="form-control" id="price" placeholder="" name="price">
+                            <input type="price" class="form-control" id="price" placeholder="" name="price" value="{{ old('price') }}" />
                         </div>
                         <div class="form-group">
                             <label for="detail">詳細</label>
-                            <input type="detail" class="form-control" id="detail" placeholder="" name="detail">
+                            <input type="detail" class="form-control" id="detail" placeholder="" name="detail" value="{{ old('detail') }}" />
                         </div>
                         <div class="section1 text-center">
                             <button type="submit" class="btn btn-primary">追加する</button>

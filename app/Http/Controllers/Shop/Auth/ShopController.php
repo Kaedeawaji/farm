@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Shop\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PlanValidate;
+use App\Http\Requests\ShopValidate;
 
 use App\Farm;
 use App\Post;
@@ -63,7 +65,7 @@ class ShopController extends Controller
     }    
 
     // プラン追加
-    public function AddPlanFprm(Request $request) {
+    public function AddPlanFprm(PlanValidate $request) {
 
         $plan = new Plan;
 
@@ -117,7 +119,7 @@ class ShopController extends Controller
 // 一覧表示修正必要
 
     // 登録情報編集　update 保存
-    public function ShopEdit(Request $request) {
+    public function ShopEdit(ShopValidate $request) {
         $farm = new Farm;
         $plan = new Plan;
         $reserve = new Reserve;

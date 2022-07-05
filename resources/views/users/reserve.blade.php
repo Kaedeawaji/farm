@@ -5,6 +5,16 @@
             <div class="col-md-5 mx-auto">
                 <div class="container">
                     <h1 class="my-2 text-center">予約フォーム</h1>
+                    @if($errors->any())
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
                     <form action="" method="post">
                         @csrf
                         <div class="container">
@@ -12,11 +22,10 @@
                                 <label for='day'>希望日</label>
                                 <input type="date" class="form-control" name="day">
 
-                                <!-- GETでその牧場の時間を入力？ -->
                                 <label for='time'>時間</label>
                                 <input type="time" class="form-control" name="time">
 
-                                <label for='body' class='mt-2'>内容</label>
+                                <label for='body' class='mt-2'>その他・ご要望など</label>
                                 <textarea type="text" class='form-control' name='body'></textarea>
 
                                 <div class="form-group p-3 form-check">
