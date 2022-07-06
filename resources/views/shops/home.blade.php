@@ -35,9 +35,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                                <tr>
+                                <tr>                                    
+                                    <th scope='col'>{{ $reserve['user']['name'] }}</th>
                                     <th scope='col'>{{ $reserve['name'] }}</th>
-                                    <th scope='col'>{{ $reserve['name'] }} </th>
                                     <th scope='col'>{{ $reserve['day'] }}</th>
                                     <th scope='col'>{{ $reserve['time'] }}</th>
                                     <th scope='col'>{{ $reserve['body'] }}</th>

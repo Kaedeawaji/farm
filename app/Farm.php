@@ -56,6 +56,9 @@ class Farm extends Authenticatable
         return $this->hasMany('App\Reserve');
     }
 
-
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPassword($token));
+    }
 
 }

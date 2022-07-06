@@ -6,6 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPassword; 
+use App\Notifications\PasswordResetUserNotification;
+use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Auth\Passwords\CanResetPassword;
 
 class User extends Authenticatable
 {
@@ -50,9 +54,9 @@ class User extends Authenticatable
     }
 
 
-        public function password_reset(){
-        return $this->belongsTo('App\Reserve', 'reserve_id', 'id');
-    }
+    // public function password_reset(){
+    // return $this->belongsTo('App\User', 'reserve_id', 'id');
+    // }
 
 
 
@@ -64,8 +68,8 @@ class User extends Authenticatable
     */
     public function sendPasswordResetNotification($token)
     {
-        // $this->notify(new ResetPasswordNotification($token));
-        $this->notify(new ResetPassword($token));
+        $this->notify(new PasswordResetUserNotification($token));
+        
     }
 
 

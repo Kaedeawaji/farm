@@ -162,7 +162,9 @@ class AdminsController extends Controller
 
 
     //プラン 論理削除
-    public function deleteplan(Plan $plan) {
+    public function deleteplan(Plan $plan, Request $request) {
+        $keyword = $request->input('keyword');
+
         $farm = new Farm;
         // $post = new Post;
 
@@ -175,14 +177,18 @@ class AdminsController extends Controller
         
         return view('admins/shoplist',[
             'farms' => $farms,
+            'keyword' => $keyword,
+
         ]);
 
     }
 
 
 
-    //プラン 論理削除
-    public function deletepost(Post $post) {
+    //口コミ 論理削除
+    public function deletepost(Post $post, Request $request) {
+        $keyword = $request->input('keyword');
+
         $farm = new Farm;
 
         $post->del_flg = '1';
@@ -194,6 +200,8 @@ class AdminsController extends Controller
         
         return view('admins/shoplist',[
             'farms' => $farms,
+            'keyword' => $keyword,
+
         ]);
 
     }
@@ -230,6 +238,7 @@ class AdminsController extends Controller
         
     // 事業者登録情報編集　update 保存
     public function shopedit(ShopValidate $request, Farm $farm) {
+        $keyword = $request->input('keyword');
 
         $columns = ['name', 'email', 'tel', 'address'];
         foreach($columns as $column) {
@@ -246,12 +255,15 @@ class AdminsController extends Controller
 
         return view('admins.shoplist',[
             'farms' => $farm,
+            'keyword' => $keyword,
+
         ]);
     
     }
 
     //事業者 論理削除  
-    public function updateshopr(Farm $farm) {
+    public function updateshopr(Farm $farm, Request $request) {
+        $keyword = $request->input('keyword');
 
         //del_flgを１に変更
         $farm->del_flg = '1';
@@ -262,6 +274,8 @@ class AdminsController extends Controller
 
         return view('admins.shoplist',[
             'farms' => $farm,
+            'keyword' => $keyword,
+
         ]);
 
     }

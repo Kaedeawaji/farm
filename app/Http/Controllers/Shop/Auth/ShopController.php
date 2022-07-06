@@ -29,10 +29,13 @@ class ShopController extends Controller
     // 予約一覧表示　
     public function index(){
         $reserve = new Reserve;
+        $plan = new Plan;
+
+        $farm = new Farm;
 
         // 予約リストの取得
         $reserve = Auth::user()->reserve()->where('del_flg', '0')->paginate(5);
-        
+
         // var_dump($reserve);
         return view('shops.home',[
             'reserves' => $reserve,
@@ -45,7 +48,7 @@ class ShopController extends Controller
 
         // $farms = $farm->plan()->where('del_flg', '0')->get();
         $plans = Auth::user()->plan()->where('del_flg', '0')->paginate(5);
-        $with = $farm->with('plan')->where('del_flg', '0')->get();
+        // $with = $farm->with('plan')->where('del_flg', '0')->get();
 
         // var_dump($plans);
         return view('shops.plan_list',[
