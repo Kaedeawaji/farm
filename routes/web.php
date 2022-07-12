@@ -77,6 +77,9 @@ Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
 
     // 予約一覧画面へ　listを表示
     Route::get('/res_list', [ShopController::class, 'ReserveList'])->name('res_list'); //予約一覧画面へ
+    // 予約 論理削除
+    Route::get('/update_res/{reserve}', [ShopController::class, 'updateres'])->name('update.res'); 
+    
     // プラン一覧画面へ　listを表示
     Route::get('/plan_list', [ShopController::class, 'PlanList'])->name('plan_list'); //プラン一覧画面へ
     // 登録情報編集

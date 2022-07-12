@@ -19,4 +19,9 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+// パスリセット追加
+    public function broker()
+    {
+        return \Password::broker('admins');
+    }
 }

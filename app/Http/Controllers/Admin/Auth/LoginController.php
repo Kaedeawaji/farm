@@ -51,4 +51,11 @@ class LoginController extends Controller
     {
         return Auth::guard('admin');
     }
+
+    // ログアウトした時のリダイレクト先
+    public function loggedOut(Request $request)
+    {
+        // return redirect(route('top'))->with('logout', 'ログアウトしました！');
+        return redirect('admin/login');
+    }
 }

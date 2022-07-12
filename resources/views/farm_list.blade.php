@@ -28,7 +28,7 @@
         </ul>
     </div>
 @endcan
-
+<div class="col-md-8 mx-auto">
     <div class="col-md-5 mx-auto">
         <h1 class="my-2 text-center">牧場一覧</h1>
         

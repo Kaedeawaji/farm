@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\AdminResetPassword;
 
 
 class Admin extends Authenticatable
@@ -44,12 +45,12 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function reserve(){
-    //     return $this->hasMany('App\Reserve');
-    // }
+    protected $guard = 'admin';
 
-    // public function post(){
-    //     return $this->hasMany('App\Post');
-    // }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPassword($token));
+        
+    }
 
 }

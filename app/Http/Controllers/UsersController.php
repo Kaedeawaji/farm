@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostValidate;
 use App\Http\Requests\ReserveValidate;
 use App\Http\Requests\UserValidate;
+// メール送信
+use Illuminate\Support\Facades\Mail; 
+use App\Mail\ReserveMail;
 
 use App\User;
 use App\Farm;
@@ -39,11 +42,14 @@ class UsersController extends Controller
         // とりあえずIDを指定している。そのプランのIDを渡せるように
         $reserve->plan_id = $plan->id;
         $reserve->farm_id = $plan->farm_id;
-
         $reserve->user_id = Auth::user()->id;
 
-
         Auth::user()->reserve()->save($reserve);
+
+        //メール送信
+        // $name = $request['name'];
+        $name = Auth::user();
+        Mail::send(new ReserveMail($name));
 
         return view('users/reserve_comp',[
         ]);

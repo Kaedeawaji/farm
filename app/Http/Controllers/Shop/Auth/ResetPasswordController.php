@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Shop\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ResetPasswordController extends Controller
 {
@@ -26,7 +29,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::SHOPHOME;
+    protected $redirectTo = RouteServiceProvider::SHOP_HOME;
 
     public function __construct()
     {
@@ -35,7 +38,7 @@ class ResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
-        return view('auth.passwords.reset')->with(
+        return view('shops.auth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email, 'authgroup' => 'shop']
         );
     }
@@ -47,6 +50,6 @@ class ResetPasswordController extends Controller
 
     protected function broker()
     {
-        return Password::broker('shops');
+        return \Password::broker('shops');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.shop_layout')
 @section('content')
 <main class="py-4">
-    <div class="col-md-5 mx-auto">
+    <!-- <div class="col-md-5 mx-auto"> -->
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
@@ -37,12 +37,12 @@
                         <tbody>
                                 <tr>                                    
                                     <th scope='col'>{{ $reserve['user']['name'] }}</th>
-                                    <th scope='col'>{{ $reserve['name'] }}</th>
+                                    <th scope='col'>{{ $reserve['plan']['name'] }}</th>
                                     <th scope='col'>{{ $reserve['day'] }}</th>
                                     <th scope='col'>{{ $reserve['time'] }}</th>
                                     <th scope='col'>{{ $reserve['body'] }}</th>
                                     <th scope='col'>
-                                        <a href="{{ route('update.reserve', ['reserve' => $reserve['id']]) }}">キャンセル</a>
+                                        <a href="{{ route('shop.update.res', ['reserve' => $reserve['id']]) }}">キャンセル</a>
                                     </th>
                                 </tr>
                         </tbody>
@@ -52,7 +52,7 @@
             @endforeach
         </div> 
         <div class="d-flex justify-content-center">
-            {{ $reserves->links() }}
+        {{ $reserves->links() }}
         </div>
 
     </div> 

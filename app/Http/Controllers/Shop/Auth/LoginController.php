@@ -52,6 +52,11 @@ class LoginController extends Controller
     }
 
 
+    // ログアウトした時のリダイレクト先
+    public function loggedOut(Request $request)
+    {
+        // return redirect(route('top'))->with('logout', 'ログアウトしました！');
+    }
 
     
     public function logout(Request $request)

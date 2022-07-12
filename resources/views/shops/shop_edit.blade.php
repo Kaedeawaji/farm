@@ -2,11 +2,11 @@
 @section('content')
     <body>
         <main class="py-4">
-            <div class="col-md-5 mx-auto">
+            <!-- <div class="col-md-5 mx-auto"> -->
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('shop.shop_home') }}">予約一覧</a>
+                            <a class="nav-link" href="{{ route('shop.shop_home') }}">予約一覧</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('shop.plan_list') }}">プラン一覧</a>
@@ -17,9 +17,9 @@
                     </ul>
                 </div>
                 <div class="col-md-8 mx-auto">
-            <div class="col-md-5 mx-auto">
-                <h1 class="my-3 text-center">事業者登録情報編集</h1>
-            </div>  
+                    <div class="col-md-5 mx-auto">
+                        <h1 class="my-3 text-center">事業者登録情報編集</h1>
+                    </div>  
 
             @if($errors->any())
             <div class='alert alert-danger'>

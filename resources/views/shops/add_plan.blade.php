@@ -1,7 +1,7 @@
 @extends('layouts.shop_layout')
 @section('content')
     <main class="py-4">
-        <div class="col-md-5 mx-auto">
+        <!-- <div class="col-md-5 mx-auto"> -->
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
@@ -15,7 +15,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="card-header">
+            <div class="m-3">
                 <h4 class='text-center'>体験プラン追加</h1>
             </div>
             <div class="card-body">

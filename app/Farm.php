@@ -1,12 +1,11 @@
 <?php
 
 namespace App;
-// namespace App\Http\Controllers\Shop;
-
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ShopPasswordResetNotification;
 
 class Farm extends Authenticatable
 
@@ -58,7 +57,8 @@ class Farm extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new AdminResetPassword($token));
+        $this->notify(new ShopPasswordResetNotification($token));
     }
+
 
 }

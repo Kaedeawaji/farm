@@ -16,6 +16,8 @@
         </li>
         </ul>
     </div>
+    <h1 class="my-2">事業者一覧</h1>
+
     <div class="card-body">
         <div class="d-flex justify-content-center">
             <form action="{{ route('shop_list') }}" method="GET">
@@ -24,9 +26,7 @@
             </form>
         </div> 
         <div class="container">
-            <h1 class="my-2">事業者一覧</h1>
             @foreach($farms as $farm)
-
             <div class="m-3 card">            
                 <div class="card-body text-center">
                     <table class='table'>

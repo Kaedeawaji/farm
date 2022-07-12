@@ -40,9 +40,9 @@
                             });
                         </script>
                     @else
-                        <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a>
+                        <!-- <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a>
                         /
-                        <a class="my-navbar-item" href="{{ route('admin.register') }}">新規登録</a>
+                        <a class="my-navbar-item" href="{{ route('admin.register') }}">新規登録</a> -->
                     @endif
                 </div>
             </nav>

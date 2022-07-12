@@ -1,22 +1,22 @@
 @extends('layouts.user_layout')
 @section('content')
 <main class="py-4">
-    <div class="col-md-5 mx-auto">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('reslist') }}">予約一覧</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('post.list') }}">口コミ一覧</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user_edit.form') }}">登録情報編集</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-8 mx-auto">
+<div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reslist') }}">予約一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('post.list') }}">口コミ一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user_edit.form') }}">登録情報編集</a>
+                    </li>
+                </ul>
+            </div>
+
         <div class="col-md-5 mx-auto">
+
         <h1 class="my-2 text-center">予約一覧</h1>
     </div>  
     @foreach($reserves as $reserve)

@@ -30,17 +30,33 @@ class ShopController extends Controller
     public function index(){
         $reserve = new Reserve;
         $plan = new Plan;
-
         $farm = new Farm;
 
         // 予約リストの取得
-        $reserve = Auth::user()->reserve()->where('del_flg', '0')->paginate(5);
+        $reserve = Auth::user($farm)->reserve()->where('del_flg', '0')->paginate(5);
 
         // var_dump($reserve);
         return view('shops.home',[
             'reserves' => $reserve,
         ]);
     }
+
+    //予約 論理削除  
+    public function updateres(Reserve $reserve) {
+
+        $reserve->del_flg = '1';
+        // $plan->timestamps = false;
+        $reserve->save();
+
+        $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
+
+        return view('shops.home',[
+            'reserves' => $reserve,
+        ]);
+    }
+    
+
+
 
     // プラン一覧表示
     public function PlanList(){

@@ -2,27 +2,30 @@
 
 namespace App\Notifications;
 
+use App\Mail\ResetPasswordMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Auth\Notifications\ResetPassword;
 
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 
-
-class PasswordResetUserNotification extends Notification
+class PasswordResetUserNotification extends ResetPassword
 {
     use Queueable;
 
-    // public $token;
+    public $token;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        // 
+        $this->token = $token;
     }
 
     /**
@@ -43,13 +46,26 @@ class PasswordResetUserNotification extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
 
-    public function toMail($notifiable)
+    // public function toMail($notifiable)
+    // {
+        // return (new MailMessage)
+            // ->subject('パスワード初期化についてのお知らせ')
+            // ->line('パスワード再設定ボタンを押してパスワードを再設定してください。')
+            // ->action('パスワード再設定', url('Auth/password/reset'))
+            // ->line('このメールに心当たりのない場合は破棄してください。');
+    // }
+
+    public function toMail($user)
     {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+        if (static::$toMailCallback) {
+            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+        }
+        $url = url(route('password.reset',['token' => $this->token,'email' => $user->email],false));
+        $mail = new ResetPasswordMail($user,$url);
+        return $mail->to($user->email);
     }
+
+
 
 
     /**
