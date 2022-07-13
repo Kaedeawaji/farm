@@ -1,7 +1,7 @@
 @extends('layouts.shop_layout')
 @section('content')
 <main class="py-4">
-    <!-- <div class="col-md-5 mx-auto"> -->
+    <div class="">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
@@ -27,16 +27,20 @@
                         <thead>
                             <tr>
                                 <th scope='col'>名前</th>
+                                <th scope='col'>アドレス</th>
+                                <th scope='col'>電話番号</th>
                                 <th scope='col'>プラン名</th>
                                 <th scope='col'>体験日</th>
                                 <th scope='col'>時間</th>
-                                <th scope='col'>内容</th>
+                                <th scope='col'>その他</th>
                                 <th scope='col'></th>
                             </tr>
                         </thead>
                         <tbody>
                                 <tr>                                    
                                     <th scope='col'>{{ $reserve['user']['name'] }}</th>
+                                    <th scope='col'>{{ $reserve['user']['email'] }}</th>
+                                    <th scope='col'>{{ $reserve['user']['tel'] }}</th>
                                     <th scope='col'>{{ $reserve['plan']['name'] }}</th>
                                     <th scope='col'>{{ $reserve['day'] }}</th>
                                     <th scope='col'>{{ $reserve['time'] }}</th>
@@ -52,9 +56,18 @@
             @endforeach
         </div> 
         <div class="d-flex justify-content-center">
-        {{ $reserves->links() }}
+            {{-- paginate --}}
+                @if ( $reserves->hasPages() )
+                    {!! $reserves->links() !!}
+                @else
+                    <div class="g_pager">
+                        <a class="prev"></a>
+                        <a class="current" href=""></a>
+                        <a class="next"></a>
+                    </div>
+                @endif
+            {{-- / paginate --}}
         </div>
-
     </div> 
 </main>
 @endsection('content')

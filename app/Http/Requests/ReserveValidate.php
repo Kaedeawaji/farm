@@ -26,7 +26,8 @@ class ReserveValidate extends FormRequest
         return [
             'day' => 'required',
             'time' => 'required',
-            'body' => 'max:255'
+            'body' => 'max:255',
+            'checkbox' => 'required',
         ];
     }
 }

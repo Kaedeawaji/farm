@@ -35,7 +35,6 @@ class ShopController extends Controller
         // 予約リストの取得
         $reserve = Auth::user($farm)->reserve()->where('del_flg', '0')->paginate(5);
 
-        // var_dump($reserve);
         return view('shops.home',[
             'reserves' => $reserve,
         ]);
@@ -48,7 +47,7 @@ class ShopController extends Controller
         // $plan->timestamps = false;
         $reserve->save();
 
-        $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
+        $reserve = Auth::user()->reserve()->where('del_flg', '0')->paginate(5);
 
         return view('shops.home',[
             'reserves' => $reserve,
@@ -98,7 +97,7 @@ class ShopController extends Controller
         $plan->timestamps = false;        
         $plan->save(); //saveを実行
 
-        $plans = Auth::user()->plan()->where('del_flg', '0')->get();
+        $plans = Auth::user()->plan()->where('del_flg', '0')->paginate(5);
 
         return view('shops.plan_list',[
             'plan' => $plans,
@@ -114,7 +113,7 @@ class ShopController extends Controller
         $plan->timestamps = false;
         $plan->save();
 
-        $plans = Auth::user()->plan()->where('del_flg', '0')->get();
+        $plans = Auth::user()->plan()->where('del_flg', '0')->paginate(5);
 
         return view('shops.plan_list',[
             'plan' => $plans,

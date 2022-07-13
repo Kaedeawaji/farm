@@ -56,7 +56,14 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{4}$/'],
+
+        ],[
+        'tel.required' => '電話番号を入力してください。',
+        'tel.regex' => '電話番号は、半角数字と半角ハイフンで入力してください。'
+
+        ]
+);
     }
 
     /**
@@ -86,8 +93,15 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{4}$/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ],[
+        'tel.required' => '電話番号を入力してください。',
+        'tel.regex' => '電話番号は、半角数字と半角ハイフンで入力してください。'
+
+        ]
+    
+    );
     }
 
     public function showAdminRegisterForm()

@@ -49,7 +49,8 @@ return [
     'ip'                   => ':attributeには正しい形式のIPアドレスを指定してください。',
     'ipv4'                 => ':attributeには正しい形式のIPv4アドレスを指定してください。',
     'ipv6'                 => ':attributeには正しい形式のIPv6アドレスを指定してください。',
-    'json'                 => ':attributeには正しい形式のJSON文字列を指定してください。',    'gt' => [
+    'json'                 => ':attributeには正しい形式のJSON文字列を指定してください。',    
+    'gt' => [
         'numeric' => 'The :attribute must be greater than :value.',
         'file' => 'The :attribute must be greater than :value kilobytes.',
         'string' => 'The :attribute must be greater than :value characters.',
@@ -99,10 +100,10 @@ return [
     'password' => 'The password is incorrect.',
 
     'not_in' => ':attributeには:valuesのうちいずれとも異なる値を指定してください。',
-    'numeric' => ':attributeには数値を指定してください。',
+    'numeric' => ':attributeには半角数字を指定してください。',
     'present' => ':attributeには現在時刻を指定してください。',
-    'regex' => '正しい形式の:attributeを指定してください。',
-    'required' => ':欄は必須項目です。',
+    'regex' => ':attributeは半角数字と半角ハイフンで入力してください。',
+    'required' => ':attribute欄は必須項目です。',
     'required_if' => ':otherが:valueの時:attributeは必須です。',
     'required_unless' => ':otherが:values以外の時:attributeは必須です。',
     'required_with' => ':valuesのうちいずれかが指定された時:attributeは必須です。',
@@ -154,7 +155,26 @@ return [
     |
     */
 
-    'attributes' => [],
-    'email' => 'メールアドレス',
-    'password' => 'パスワード',
+    'attributes' => [
+
+        'day' => '日時',
+        'time' => '時間',
+        'body' => 'その他・ご要望など',
+        'checkbox' => 'チェックボックス',
+
+        'title' => 'タイトル',
+        'body' => '内容',
+
+        'name' => '名前',
+        'email' => 'メールアドレス',
+        'tel' => '電話番号',
+        'address' => '住所',
+        'password' => 'パスワード',
+
+        'name' => '名前',
+        'price' => '料金',
+        'detail' => '詳細',
+
+
+    ],
 ];

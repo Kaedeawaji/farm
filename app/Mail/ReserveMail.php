@@ -16,9 +16,12 @@ class ReserveMail extends Mailable
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct($name, $email, $inputs)
     {
         $this->name = $name;
+        $this->email = $email;
+        $this->inputs = $inputs;
+
     }
 
     /**
@@ -26,14 +29,16 @@ class ReserveMail extends Mailable
      *
      * @return $this
      */
+
     public function build()
     {
-        // return $this->view('view.name');
-
-        return 
-        $this->subject('予約完了しました。')  // 件名
+        return $this->to($this->email)
+        ->subject('予約完了しました。')// 件名
         ->view('emails.reserve')  // 本文
-        ->with(['name' => $this->name]);
+        ->with([
+            'name' => $this->name,
+            'inputs' => $this->inputs
+        ]); 
     }
-}
 
+}

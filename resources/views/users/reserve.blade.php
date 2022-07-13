@@ -20,17 +20,17 @@
                         <div class="container">
                             <div class="form-group">
                                 <label for='day'>希望日</label>
-                                <input type="date" class="form-control" name="day">
+                                <input type="date" class="form-control" name="day" value="{{ old('day') }}">
 
-                                <label for='time'>時間</label>
-                                <input type="time" class="form-control" name="time">
+                                <label for='time'>希望時間</label>
+                                <input type="time" class="form-control" name="time" value="{{ old('time') }}">
 
-                                <label for='body' class='mt-2'>その他・ご要望など</label>
-                                <textarea type="text" class='form-control' name='body'></textarea>
+                                <label for='body' class='mt-2'>人数・その他・ご要望など</label>
+                                <textarea type="text" class='form-control' name='body'>{{ old('body') }}</textarea>
 
                                 <div class="form-group p-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">内容を確認しチェックを入れてください。</label>
+                                    <input type="checkbox" name="checkbox" class="form-check-input" id="Check1">
+                                    <label class="form-check-label" for="Check1">内容を確認しチェックを入れてください。</label>
                                 </div>
                                 <div class="row justify-content-center">
                                     <button type="submit" class="btn btn-primary">予約する</button>

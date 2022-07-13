@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
 
     // 予約一覧画面へ　listを表示
     Route::get('/res_list', [ShopController::class, 'ReserveList'])->name('res_list'); //予約一覧画面へ
-    // 予約 論理削除
+    // 予約論理削除
     Route::get('/update_res/{reserve}', [ShopController::class, 'updateres'])->name('update.res'); 
     
     // プラン一覧画面へ　listを表示
@@ -109,31 +109,30 @@ Route::prefix('admin')->namespace('admin')->name('admin.')->group (function() {
 
 });
 Route::prefix('admin')->group (function() {
-// ユーザー一覧表示
-Route::get('/user_list', [AdminsController::class, 'UserList'])->name('user_list'); 
-// ユーザー情報編集
-Route::get('/user_edit{user}', [AdminsController::class, 'usereditform'])->name('user_edit');
-Route::post('/user_edit{user}', [AdminsController::class, 'useredit']); //フォーム送信があったとき
-//ユーザー 論理削除
-Route::get('/up_user/{user}', [AdminsController::class, 'updateuser'])->name('update.user');
+    // ユーザー一覧表示
+    Route::get('/user_list', [AdminsController::class, 'UserList'])->name('user_list'); 
+    // ユーザー情報編集
+    Route::get('/user_edit{user}', [AdminsController::class, 'usereditform'])->name('user_edit');
+    Route::post('/user_edit{user}', [AdminsController::class, 'useredit']); //フォーム送信があったとき
+    //ユーザー 論理削除
+    Route::get('/up_user/{user}', [AdminsController::class, 'updateuser'])->name('update.user');
 
 
-// 事業者一覧表示
-Route::get('/shop_list', [AdminsController::class, 'ShopList'])->name('shop_list');
-Route::get('/shop_detail{farm}', [AdminsController::class, 'ShopDetail'])->name('shop_detail');
-// 事業者情報編集
-Route::get('/shop_edit{farm}', [AdminsController::class, 'shopeditform'])->name('shop_edit');
-Route::post('/shop_edit{farm}', [AdminsController::class, 'shopedit']); //フォーム送信があったとき
-// 事業者 論理削除
-Route::get('/up_shop/{farm}', [AdminsController::class, 'updateshopr'])->name('update.shop');
-// プラン 論理削除
-Route::get('/plan/{plan}', [AdminsController::class, 'deleteplan'])->name('delete.plan'); 
-// 口コミ 論理削除
-Route::get('/post/{post}', [AdminsController::class, 'deletepost'])->name('delete.post'); 
+    // 事業者一覧表示
+    Route::get('/shop_list', [AdminsController::class, 'ShopList'])->name('shop_list');
+    Route::get('/shop_detail{farm}', [AdminsController::class, 'ShopDetail'])->name('shop_detail');
+    // 事業者情報編集
+    Route::get('/shop_edit{farm}', [AdminsController::class, 'shopeditform'])->name('shop_edit');
+    Route::post('/shop_edit{farm}', [AdminsController::class, 'shopedit']); //フォーム送信があったとき
+    // 事業者 論理削除
+    Route::get('/up_shop/{farm}', [AdminsController::class, 'updateshopr'])->name('update.shop');
+    // プラン 論理削除
+    Route::get('/plan/{plan}', [AdminsController::class, 'deleteplan'])->name('delete.plan'); 
+    // 口コミ 論理削除
+    Route::get('/post/{post}', [AdminsController::class, 'deletepost'])->name('delete.post'); 
 
 });
 
-// });
 
 
 

@@ -148,7 +148,6 @@ class AdminsController extends Controller
         $posts = $farm->post()->where('del_flg', '0')->paginate(5);
         
 
-        // var_dump($plans);
         return view('admins/shopdetail',[
             'farms' => $farm,
             'plan' => $plans,
@@ -178,9 +177,7 @@ class AdminsController extends Controller
         return view('admins/shoplist',[
             'farms' => $farms,
             'keyword' => $keyword,
-
         ]);
-
     }
 
 
@@ -205,20 +202,6 @@ class AdminsController extends Controller
         ]);
 
     }
-    // //口コミ　論理削除
-    // public function updatepost(Post $post) {
-
-    //     $post->del_flg = '1';
-
-    //     $post->save();
-
-    //     $posts = Auth::user()->post()->where('del_flg', '0')->get();
-
-    //     return view('users/post_list',[
-    //         'posts' => $posts,
-    //     ]);
-
-    // }
 
 
 

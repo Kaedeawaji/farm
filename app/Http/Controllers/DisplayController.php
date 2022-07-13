@@ -45,6 +45,10 @@ class DisplayController extends Controller
         $plans = $farm->plan()->where('del_flg', '0')->get();
         $posts = $farm->post()->where('del_flg', '0')->paginate(5);
 
+        // if (is_null($farm)) {
+        //     abort(404);
+        // }
+
         return view('farm_detail',[
             'farms' => $farm,
             'plan' => $plans,

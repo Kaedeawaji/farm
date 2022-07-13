@@ -58,27 +58,6 @@ class ShopPasswordResetNotification extends ResetPassword
         return $mail->to($notifiable->email);
     }
 
-    // public function toMail($shop)
-    // {
-    //     if (static::$toMailCallback) {
-    //         return call_user_func(static::$toMailCallback, $notifiable, $this->token);
-    //     }
-    //     $url = url(route('password.reset',['token' => $this->token,'email' => $shop->email],false));
-    //     $mail = new ShopResetPasswordMail($shop,$url);
-    //     return $mail->to($shop->email);
-    // }
-
-
-
-
-
-        // return (new MailMessage)
-        //     ->line('You are receiving this email because we received a password reset request for your account.')
-        //     ->action('Reset Password', url(config('app.url').route('shop.password.reset', $this->token, false)))
-        //     ->line('If you did not request a password reset, no further action is required.');
-    // }
-
-
 
     /**
      * Get the array representation of the notification.

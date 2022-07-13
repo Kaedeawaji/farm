@@ -11,7 +11,7 @@
                         <a class="nav-link" href="{{ route('post.list') }}">口コミ一覧</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user_edit.form') }}">登録情報編集</a>
+                        <a class="nav-link active" href="{{ route('user_edit.form') }}">登録情報編集</a>
                     </li>
                 </ul>
             </div>

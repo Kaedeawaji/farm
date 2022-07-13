@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-md-5 mx-auto">
-            <h1 class="my-2 text-center">牧場詳細</h1>
+            <h1 class="my-2 text-center">プラン一覧</h1>
         </div>  
         @foreach ($plan as $plans)
         <div class="m-3 card">
@@ -55,33 +55,39 @@
 
         
     @foreach ($post as $posts)
-            <div class="m-3 card">
-            <div class="card-body text-center">
-                    <tbody>
-                        <tr>
-                            <span class="star5_rating" data-rate="{{ $posts['star'] }}"></span>
+    <div class="m-3 card">
+        <div class="card-body text-center">
+            <tbody>
+                <tr>
+                    <span class="star5_rating" data-rate="{{ $posts['star'] }}"></span>
 
-                            <div class="d-flex justify-content-around">
-                                <th scope='col'>牧場名：</th><br>
-                                <th scope='col'>タイトル：{{ $posts['title'] }}</th><br>
-                                <th scope='col'>内容：{{ $posts['body'] }}</th><br>
-                                <img class="text-right" src="{{ Storage::url($posts->img) }}" width="25%">
-                                <th scope='col'>
-                                    <a href="{{ route('delete.post', ['post' => $posts->id]) }}">削除</a>
-                                </th>
-                            </div>        
-                        </tr>
-
-
-                    </tbody>
-                </div>        
-            </div>
-            @endforeach
-
-
+                    <div class="d-flex justify-content-around">
+                        <th scope='col'>牧場名：</th><br>
+                        <th scope='col'>タイトル：{{ $posts['title'] }}</th><br>
+                        <th scope='col'>内容：{{ $posts['body'] }}</th><br>
+                        <img class="text-right" src="{{ Storage::url($posts->img) }}" width="25%">
+                        <th scope='col'>
+                            <a href="{{ route('delete.post', ['post' => $posts->id]) }}">削除</a>
+                        </th>
+                    </div>        
+                </tr>
+            </tbody>
+        </div>        
+    </div>
+    @endforeach
     <div class="d-flex justify-content-center">
-        {{ $post->links() }}
-    </div>    
-</div>
+        {{-- paginate --}}
+            @if ( $post->hasPages() )
+                {!! $post->links() !!}
+            @else
+                <div class="g_pager">
+                    <a class="prev"></a>
+                    <a class="current" href=""></a>
+                    <a class="next"></a>
+                </div>
+            @endif
+        {{-- / paginate --}}
+    </div>
+</body>
 
 @endsection('content')

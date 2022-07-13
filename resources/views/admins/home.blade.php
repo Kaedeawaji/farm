@@ -57,8 +57,18 @@
             </div>
             @endforeach
             <div class="d-flex justify-content-center">
-                {{ $users->links() }}
-            </div>        
+                {{-- paginate --}}
+                    @if ( $users->hasPages() )
+                        {!! $users->links() !!}
+                    @else
+                        <div class="g_pager">
+                            <a class="prev"></a>
+                            <a class="current" href=""></a>
+                            <a class="next"></a>
+                        </div>
+                    @endif
+                {{-- / paginate --}}
+            </div>    
         </div> 
     </div>
 </body>

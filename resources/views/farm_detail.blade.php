@@ -7,7 +7,7 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('reslist') }}">予約一覧</a>
+                <a class="nav-link " href="{{ route('reslist') }}">予約一覧</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('post.list') }}">口コミ一覧</a>
@@ -78,9 +78,9 @@
         <div class="m-3 card ">
             <div class="card-body ">
                 <tbody>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center justify-content-center">
                         <tr>
-                        <th scope='col'>名前：{{ $posts['user']['name'] }}</th><br>
+                        <th scope='col'>名前：{{ $posts['user']['name'] }}</th>　　<br>
                         <span class="star5_rating" data-rate="{{ $posts['star'] }}"></span>
                         </tr>
                     </div>        
@@ -99,10 +99,20 @@
             </div>        
         </div>
         @endforeach
-
         <div class="d-flex justify-content-center">
-            {{ $post->links() }}
-        </div>
+        {{-- paginate --}}
+            @if ( $post->hasPages() )
+                {!! $post->links() !!}
+            @else
+                <div class="g_pager">
+                    <a class="prev"></a>
+                    <a class="current" href=""></a>
+                    <a class="next"></a>
+                </div>
+            @endif
+        {{-- / paginate --}}
+    </div>
+
     </div>
 </main>
 @endsection('content')

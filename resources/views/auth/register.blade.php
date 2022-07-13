@@ -17,13 +17,13 @@
             <form action="{{ route('register') }}" method="POST">
               @csrf
                 <label for="name">ユーザー名</label>
-                <input type="text" class="form-control" id="name" name="name"/>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"/>
 
                 <label for="email">メールアドレス</label>
-                <input type="text" class="form-control" id="email" name="email" />
+                <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}"/>
 
                 <label for="tel">電話番号</label>
-                <input type="tel" class="form-control" id="tel" name="tel" />
+                <input type="tel" class="form-control" id="tel" name="tel" value="{{ old('tel') }}"/>
 
                 <label for="password">パスワード</label>
                 <input type="password" class="form-control" id="password" name="password">

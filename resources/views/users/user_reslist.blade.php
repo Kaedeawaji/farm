@@ -4,7 +4,7 @@
 <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                    <a class="nav-link" href="{{ route('reslist') }}">予約一覧</a>
+                    <a class="nav-link active" href="{{ route('reslist') }}">予約一覧</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('post.list') }}">口コミ一覧</a>
@@ -55,7 +55,18 @@
     @endforeach
 
     <div class="d-flex justify-content-center">
-        {{ $reserves->links() }}
+        {{-- paginate --}}
+            @if ( $reserves->hasPages() )
+                {!! $reserves->links() !!}
+            @else
+                <div class="g_pager">
+                    <a class="prev"></a>
+                    <a class="current" href=""></a>
+                    <a class="next"></a>
+                </div>
+            @endif
+        {{-- / paginate --}}
     </div>
+
 </main>
     @endsection('content')

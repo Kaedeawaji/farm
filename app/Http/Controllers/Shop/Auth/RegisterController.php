@@ -54,6 +54,13 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'tel' => ['required', 'regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{4}$/'],
+            'address' => ['required', 'max:50'],
+        ],[
+            'name.required' => '事業者名を入力してください。',
+            'tel.required' => '電話番号を入力してください。',
+            'tel.regex' => '電話番号は、半角数字と半角ハイフンで入力してください。',
+            'address.required' => '住所を入力してください。',
         ]);
     }
 

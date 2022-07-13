@@ -16,6 +16,20 @@ class PlanValidate extends FormRequest
         return true;
     }
 
+
+            /**
+     * バリデーションエラーメッセージ
+     *
+     * @var array
+     */
+    protected $messages = [
+        'name.required' => 'プラン名を入力してください。',
+        'price.regex' => '半角数字で入力してください。',
+
+    ];
+
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,8 +38,8 @@ class PlanValidate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'price' => 'required',
+            'name' => 'required|max:255',
+            'price' => 'required|numeric:/^[0-9０-９]+$/',
             'detail' => 'required|max:255'
         ];
     }

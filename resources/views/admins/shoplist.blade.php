@@ -65,8 +65,18 @@
             @endforeach
 
             <div class="d-flex justify-content-center">
-                {{ $farms->links() }}
-            </div>    
+                {{-- paginate --}}
+                    @if ( $farms->hasPages() )
+                        {!! $farms->links() !!}
+                    @else
+                        <div class="g_pager">
+                            <a class="prev"></a>
+                            <a class="current" href=""></a>
+                            <a class="next"></a>
+                        </div>
+                    @endif
+                {{-- / paginate --}}
+            </div>
         </div>
     </div>
 </body>

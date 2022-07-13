@@ -8,7 +8,8 @@
                     <div class="col-md-5 mx-auto">
                         <div class="card">
                             <div class="card-body text-center">
-                                <p>予約ありがとうございました。<br>送信完了しました。</p>
+                                <p>ご予約ありがとうございました。<br>送信完了しました。<br>
+                            ※時間については変更がある場合のみご連絡いたします。</p>
                                 <div class="section1 text-center">
                                     <a href="{{ route('reslist') }}">
                                         <button type="submit" href="farm_list.php" class="btn btn-primary">戻る</button>

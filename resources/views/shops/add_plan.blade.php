@@ -45,7 +45,8 @@
                         </div>
                         <div class="form-group">
                             <label for="detail">詳細</label>
-                            <input type="detail" class="form-control" id="detail" placeholder="" name="detail" value="{{ old('detail') }}" />
+                            <textarea type="detail" class="form-control" id="detail" name="detail" 
+                            placeholder="例）所要時間：約２時間　　人数：最大１０人まで　　営業時間：10時から15時まで">{{ old('detail') }}</textarea>
                         </div>
                         <div class="section1 text-center">
                             <button type="submit" class="btn btn-primary">追加する</button>

@@ -8,7 +8,7 @@
                     <a class="nav-link" href="{{ route('reslist') }}">予約一覧</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.list') }}">口コミ一覧</a>
+                        <a class="nav-link active" href="{{ route('post.list') }}">口コミ一覧</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user_edit.form') }}">登録情報編集</a>
@@ -47,8 +47,19 @@
             </div>
             @endforeach
             <div class="d-flex justify-content-center">
-                {{ $posts->links() }}
-            </div>            
+                {{-- paginate --}}
+                    @if ( $posts->hasPages() )
+                        {!! $posts->links() !!}
+                    @else
+                        <div class="g_pager">
+                            <a class="prev"></a>
+                            <a class="current" href=""></a>
+                            <a class="next"></a>
+                        </div>
+                    @endif
+                {{-- / paginate --}}
+            </div>
+        
         </div> 
     </main>
     @endsection('content')

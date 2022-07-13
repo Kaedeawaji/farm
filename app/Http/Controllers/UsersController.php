@@ -15,7 +15,6 @@ use App\Farm;
 use App\Post;
 use App\Plan;
 use App\Reserve;
-// use App\Http\Requests\CreateData;
 
 use Illuminate\Support\Facades\DB;
 
@@ -28,10 +27,9 @@ class UsersController extends Controller
         ]);
     }
 
-    // フォーム送信があった時POST
+    // 予約送信
     public function reserve(ReserveValidate $request, Plan $plan){
         $reserve = new Reserve;
-        // $plan = new Plan;
         $farm = new Farm;
 
 
@@ -47,14 +45,16 @@ class UsersController extends Controller
         Auth::user()->reserve()->save($reserve);
 
         //メール送信
-        // $name = $request['name'];
-        $name = Auth::user();
-        Mail::send(new ReserveMail($name));
+        $name = Auth::user()->name;
+        $email = Auth::user()->email;
+        $inputs = request();
 
+        Mail::send(new ReserveMail($name, $email, $inputs));
         return view('users/reserve_comp',[
         ]);
     }
 
+    // 予約リスト
     public function resList(){
         $plan = new Plan;
         $farm = new Farm;
@@ -82,7 +82,7 @@ class UsersController extends Controller
 
         $reserve->save();
 
-        $reserve = Auth::user()->reserve()->where('del_flg', '0')->get();
+        $reserve = Auth::user()->reserve()->where('del_flg', '0')->paginate(5);
 
         return view('users/user_reslist',[
             'reserves' => $reserve,

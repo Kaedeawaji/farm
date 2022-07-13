@@ -29,7 +29,7 @@
     </div>
 @endcan
 <div class="col-md-8 mx-auto">
-    <div class="col-md-5 mx-auto">
+    <div class="col-md-5 mx-auto ">
         <h1 class="my-2 text-center">牧場一覧</h1>
         
         <div class="d-flex justify-content-center">
@@ -64,9 +64,20 @@
         </div>
     </div>
     @endforeach
-
+    
     <div class="d-flex justify-content-center">
-        {{ $farms->links() }}
+        {{-- paginate --}}
+            @if ( $farms->hasPages() )
+                {!! $farms->links() !!}
+            @else
+                <div class="g_pager">
+                    <a class="prev"></a>
+                    <a class="current" href=""></a>
+                    <a class="next"></a>
+                </div>
+            @endif
+        {{-- / paginate --}}
     </div>
+
 </main>
 @endsection('content')
