@@ -21,7 +21,7 @@
             </div>  
             @foreach($reserves as $reserve)
 
-            <div class="m-3 card">
+            <div class="m-3 card ">
                 <div class="card-body text-center">
                     <table class='table'>
                         <thead>

@@ -54,10 +54,6 @@ class User extends Authenticatable
     }
 
 
-    // public function password_reset(){
-    // return $this->belongsTo('App\User', 'reserve_id', 'id');
-    // }
-
 
 
        /**

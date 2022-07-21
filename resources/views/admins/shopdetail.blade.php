@@ -62,7 +62,7 @@
                     <span class="star5_rating" data-rate="{{ $posts['star'] }}"></span>
 
                     <div class="d-flex justify-content-around">
-                        <th scope='col'>牧場名：</th><br>
+                        <th scope='col'>投稿者：{{ $posts['user']['name'] }}</th><br>
                         <th scope='col'>タイトル：{{ $posts['title'] }}</th><br>
                         <th scope='col'>内容：{{ $posts['body'] }}</th><br>
                         <img class="text-right" src="{{ Storage::url($posts->img) }}" width="25%">

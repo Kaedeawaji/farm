@@ -58,11 +58,7 @@ class AdminsController extends Controller
         }
 
         $users = $query->paginate(5);
-        // $user = DB::table('users')->where('del_flg', '0')->paginate(5);
-        // return view('admins.home',[
-        //     'users' => $user,
-    
-        // ]);
+
         return view('admins.home', compact('users', 'keyword'));
     }
 
@@ -129,10 +125,6 @@ class AdminsController extends Controller
 
         $farms = $query->paginate(5);
 
-        // $farms = $farm->where('del_flg', '0')->paginate(5);
-        // return view('admins/shoplist',[
-        //     'farms' => $farms,
-        // ]);
         return view('admins/shoplist', compact('farms', 'keyword'));
 
     }
@@ -189,7 +181,6 @@ class AdminsController extends Controller
         $farm = new Farm;
 
         $post->del_flg = '1';
-        // $plan->timestamps = false;
         $post->save();
 
         $farms = $farm->where('del_flg', '0')->paginate(5);

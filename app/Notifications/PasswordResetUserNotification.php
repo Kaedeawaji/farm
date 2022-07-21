@@ -46,14 +46,6 @@ class PasswordResetUserNotification extends ResetPassword
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
 
-    // public function toMail($notifiable)
-    // {
-        // return (new MailMessage)
-            // ->subject('パスワード初期化についてのお知らせ')
-            // ->line('パスワード再設定ボタンを押してパスワードを再設定してください。')
-            // ->action('パスワード再設定', url('Auth/password/reset'))
-            // ->line('このメールに心当たりのない場合は破棄してください。');
-    // }
 
     public function toMail($user)
     {

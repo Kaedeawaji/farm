@@ -5,7 +5,7 @@
             <div class="col-md-5 mx-auto">
                 <div class="container">
                     <h1 class="my-2 text-center">予約フォーム</h1>
-                    <div class="col-md-5 mx-auto">
+                    <!-- <div class="col-md-5 mx-auto"> -->
                         <div class="card">
                             <div class="card-body text-center">
                                 <p>ご予約ありがとうございました。<br>送信完了しました。<br>

@@ -68,7 +68,6 @@ Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
 
 
 //事業者専用
-// Route::group(['middleware' => ['auth', 'can:shop-higher']], function () {
     Route::prefix('shop')->namespace('shop')->name('shop.')->group (function() {
         Auth::routes();
         
@@ -95,7 +94,6 @@ Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
 
 
     });
-// });
 
 
 

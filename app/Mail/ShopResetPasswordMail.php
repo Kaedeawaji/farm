@@ -31,7 +31,6 @@ class ShopResetPasswordMail extends Mailable
      */
     public function build()
     {
-        // return $this->view('view.name');
         $result =  $this->view('emails.shop_reset_password',[
             'shop'=>$this->shop,
             'url'=>$this->url

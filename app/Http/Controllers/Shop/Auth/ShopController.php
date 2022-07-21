@@ -23,6 +23,7 @@ class ShopController extends Controller
     {
         // farmテーブルに存在するユーザーのみのアクセス
         $this->middleware('auth:shop');
+        
     }
     
 
@@ -61,9 +62,7 @@ class ShopController extends Controller
     public function PlanList(){
         $farm = new Farm;
 
-        // $farms = $farm->plan()->where('del_flg', '0')->get();
         $plans = Auth::user()->plan()->where('del_flg', '0')->paginate(5);
-        // $with = $farm->with('plan')->where('del_flg', '0')->get();
 
         // var_dump($plans);
         return view('shops.plan_list',[
@@ -75,10 +74,7 @@ class ShopController extends Controller
     // プラン追加表示
     public function AddPlan() {
 
-        // $plans = Auth::user()->plan()->where('del_flg', '0')->get();
-        // var_dump($plans);
         return view('shops.add_plan',[
-            // 'plan' => $plans
         ]);
     }    
 

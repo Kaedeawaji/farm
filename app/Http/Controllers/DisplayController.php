@@ -26,12 +26,6 @@ class DisplayController extends Controller
 
         $farms = $query->paginate(5);
 
-        // $farms = $farm->where('del_flg', '0')->paginate(5);
-
-        // return view('farm_list',[
-        //     'farms' => $farms,
-        //     'keyword' => $posts,
-        // ]);
         return view('farm_list', compact('farms', 'keyword'));
     }
 
